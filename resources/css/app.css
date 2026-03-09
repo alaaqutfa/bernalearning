@@ -1,0 +1,39 @@
+@import "tailwindcss";
+
+@theme {
+    --color-gray-50: #ffffff;
+    --color-gray-100: #f8f9fa;
+    --color-gray-200: #f0f0f0 --color-gray-300: #e8e8e8;
+    --color-gray-400: #dddddd --color-gray-500: #aaaaaa
+        --color-gray-600: #888888;
+    --color-gray-700: #666666;
+    --color-gray-800: #444444 --color-gray-900: #2c2c2c;
+
+    --color-blue-50: #fff0f3;
+    --color-blue-100: #ffe4e9;
+    --color-blue-200: #ffd9e0;
+    --color-blue-300: #ffc9d3;
+    --color-blue-400: #ffb6c1;
+    --color-blue-500: #ff9aa2;
+    --color-blue-600: #f28b98;
+    --color-blue-700: #e07a87;
+    --color-blue-800: #c66b77;
+    --color-blue-900: #a85a65;
+
+    --color-brand: #ffb6c1;
+    --color-brand-strong: #ff9aa2;
+    --color-heading: #2c2c2c;
+    --color-body: #666666;
+    --color-border: #e8e8e8;
+    --color-background-primary: #ffffff;
+    --color-background-secondary: #f8f9fa;
+
+    --shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+}
+
+/* استيراد ملف CSS الخاص بـ Flowbite */
+@import "flowbite/src/themes/default";
+/* إضافة البرنامج المساعد لـ Flowbite */
+@plugin "flowbite/plugin";
+/* تحديد مسار ملفات Flowbite لمسح الكلاسات */
+@source "../../node_modules/flowbite";
