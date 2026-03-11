@@ -10,6 +10,14 @@ use Illuminate\Http\Request;
 
 class VideoController extends Controller
 {
+
+    protected $bunnyService;
+
+    public function __construct(BunnyService $bunnyService)
+    {
+        $this->bunnyService = $bunnyService;
+    }
+
     /**
      * Display a listing of the videos.
      */
@@ -22,7 +30,7 @@ class VideoController extends Controller
             $videos = Video::with('level')->orderBy('level_id')->orderBy('order')->get();
         }
         $levels = Level::all(); // للفلترة
-        return view('admin.videos.index', compact('videos', 'levels', 'levelId'));
+        return view('admin.videos.index', compact('videos', 'levels', 'levelId') + ['bunny' => $this->bunnyService]);
     }
 
     /**
@@ -71,7 +79,7 @@ class VideoController extends Controller
             'width'                 => $videoData['width'] ?? null,
             'height'                => $videoData['height'] ?? null,
             'available_resolutions' => $videoData['availableResolutions'] ?? null,
-            'thumbnail_file_name' => $videoData['thumbnailFileName'] ?? null,
+            'thumbnail_file_name'   => $videoData['thumbnailFileName'] ?? null,
             'status'                => $videoData['status'] ?? null,
             'storage_size'          => $videoData['storageSize'] ?? null,
             'views'                 => $videoData['views'] ?? 0,
@@ -119,7 +127,7 @@ class VideoController extends Controller
             'width'                 => $videoData['width'] ?? null,
             'height'                => $videoData['height'] ?? null,
             'available_resolutions' => $videoData['availableResolutions'] ?? null,
-            'thumbnail_file_name' => $videoData['thumbnailFileName'] ?? null,
+            'thumbnail_file_name'   => $videoData['thumbnailFileName'] ?? null,
             'status'                => $videoData['status'] ?? null,
             'storage_size'          => $videoData['storageSize'] ?? null,
             'views'                 => $videoData['views'] ?? 0,
