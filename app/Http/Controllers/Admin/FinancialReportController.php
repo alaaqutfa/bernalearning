@@ -41,10 +41,8 @@ class FinancialReportController extends Controller
 
         // صافي الربح بعد المصاريف
         $netProfit = $totalRevenue - $totalExpenses - $bunnyCosts;
-
-                                                 // توزيع صافي الربح حسب النسبة
-        $netProfitOwner     = $profitOwnerTotal - $totalExpenses - $bunnyCosts;
-        $netProfitDeveloper = $profitDeveloperTotal; // 25% للمطور
+        $netProfitOwner     = $netProfit * 0.75; // 75% لبيرنا
+        $netProfitDeveloper = $netProfit * 0.25; // 25% للمطور
 
         // تفاصيل المصاريف
         $expensesByType = Expense::whereYear('expense_date', $year)

@@ -51,7 +51,7 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::resource('coupons', AdminCouponController::class)->except(['edit', 'update', 'destroy']);
 
     // إدارة المستخدمين
-    Route::resource('users', AdminUserController::class)->only(['index', 'create', 'store', 'show']);
+    Route::resource('users', AdminUserController::class);
 
     // مسارات إضافية للمستخدمين
     Route::prefix('users/{user}')->name('users.')->group(function () {

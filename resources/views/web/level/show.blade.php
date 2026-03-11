@@ -12,6 +12,7 @@
                     @include('web.level.partials.video-player', [
                         'video' => $video,
                         'signedUrl' => $signedUrl,
+                        'user' => $user
                     ])
                 </div>
 
@@ -72,6 +73,59 @@
 @endsection
 
 @push('scripts')
+    <script>
+        (function() {
+            // منع اختصارات لوحة المفاتيح
+            document.addEventListener('keydown', function(e) {
+                // F12
+                if (e.key === 'F12') {
+                    e.preventDefault();
+                    return false;
+                }
+                // Ctrl+Shift+I / Ctrl+Shift+J / Ctrl+U
+                if (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'i' || e.key === 'j')) {
+                    e.preventDefault();
+                    return false;
+                }
+                // Ctrl+U
+                if (e.ctrlKey && (e.key === 'U' || e.key === 'u')) {
+                    e.preventDefault();
+                    return false;
+                }
+            });
+
+            // منع النقر بزر الماوس الأيمن على الصفحة بأكملها
+            document.addEventListener('contextmenu', function(e) {
+                e.preventDefault();
+                return false;
+            });
+
+            // منع السحب والإفلات على الصفحة بأكملها
+            document.addEventListener('dragstart', function(e) {
+                e.preventDefault();
+                return false;
+            });
+            document.addEventListener('drop', function(e) {
+                e.preventDefault();
+                return false;
+            });
+
+            // إضافة حركة بسيطة للتوقيع المائي ليكون أكثر وضوحاً في التسجيلات
+            const watermarks = document.querySelectorAll('.video-player-wrapper .z-20');
+            watermarks.forEach(watermark => {
+                if (watermark) {
+                    let direction = 1;
+                    let baseOpacity = 0.7; // يمكن تعديلها حسب الرغبة
+                    setInterval(() => {
+                        let currentOpacity = parseFloat(getComputedStyle(watermark).opacity);
+                        if (currentOpacity >= 0.8) direction = -0.02;
+                        if (currentOpacity <= 0.5) direction = 0.02;
+                        watermark.style.opacity = currentOpacity + direction;
+                    }, 200);
+                }
+            });
+        })();
+    </script>
     <script>
         (function() {
             // منع اختصارات لوحة المفاتيح

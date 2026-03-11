@@ -52,6 +52,7 @@ class LevelController extends Controller
         $progressPercentage = $totalVideos > 0 ? round(($watchedCount / $totalVideos) * 100) : 0;
 
         return view('web.level.show', compact(
+            'user',
             'level',
             'videos',
             'video', // الفيديو الحالي
