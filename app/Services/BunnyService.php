@@ -120,12 +120,12 @@ class BunnyService
         $tokenPath = "/{$guid}/";
         $filePath  = "{$tokenPath}thumbnail.jpg";
 
-        // التوقيع الصحيح
+        // توقيع Bunny الصحيح
         $token = hash('sha256', $secret . $tokenPath . $expiresAt);
 
         $encodedTokenPath = rawurlencode($tokenPath);
 
-        return "https://{$cdnHostName}/bcdn_token={$token}&expires={$expiresAt}&token_path={$encodedTokenPath}{$filePath}";
+        return "https://{$cdnHostName}/?bcdn_token={$token}&expires={$expiresAt}&token_path={$encodedTokenPath}{$filePath}";
     }
     /*
         القيمة الصحيحة هي :
