@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
@@ -10,6 +9,12 @@ class LoginController extends Controller
 {
     public function showLoginForm()
     {
+        if (Auth::check()) {
+            if (Auth::user()->is_admin) {
+                return redirect()->route('admin.dashboard');
+            }
+            return redirect()->route('dashboard');
+        }
         return view('auth.login');
     }
 
@@ -24,8 +29,8 @@ class LoginController extends Controller
         $field = filter_var($login, FILTER_VALIDATE_EMAIL) ? 'email' : 'phone';
 
         $credentials = [
-            $field      => $login,
-            'password'  => $request->password,
+            $field     => $login,
+            'password' => $request->password,
         ];
 
         if (Auth::attempt($credentials, $request->filled('remember'))) {
