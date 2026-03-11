@@ -112,20 +112,23 @@ class BunnyService
 
     public function signedThumbnailUrl($guid, $expires = 2592000)
     {
-        $secret      = env('BUNNY_SIGNING_SECRET');
-        $cdnHostName = $this->cdnHostName;
+        $secret         = env('BUNNY_SIGNING_SECRET');
+        $videoLibraryId = 613770;
+
+        $cdnHost = "vz-{$videoLibraryId}.b-cdn.net";
 
         $expiresAt = time() + $expires;
 
         $tokenPath = "/{$guid}/";
         $filePath  = "{$tokenPath}thumbnail.jpg";
 
-        // توقيع Bunny الصحيح
-        $token = hash('sha256', $secret . $tokenPath . $expiresAt);
+        $hash = hash('sha256', $secret . $tokenPath . $expiresAt, true);
 
-        $encodedTokenPath = rawurlencode($tokenPath);
+        $token = rtrim(strtr(base64_encode($hash), '+/', '-_'), '=');
 
-        return "https://{$cdnHostName}/?bcdn_token={$token}&expires={$expiresAt}&token_path={$encodedTokenPath}{$filePath}";
+        $encodedPath = rawurlencode($tokenPath);
+
+        return "https://{$cdnHost}/?bcdn_token={$token}&expires={$expiresAt}&token_path={$encodedPath}{$filePath}";
     }
     /*
         القيمة الصحيحة هي :
