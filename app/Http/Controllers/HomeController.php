@@ -1,8 +1,6 @@
 <?php
-
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Level;
 use Illuminate\Support\Facades\Auth;
 
@@ -16,11 +14,12 @@ class HomeController extends Controller
     public function dashboard()
     {
         $user = Auth::user();
-        if($user->is_admin) {
+        if ($user->is_admin) {
             return redirect()->route('admin.dashboard');
         }
-        $subscribedLevels = $user->subscribedLevels;
-        $levels = Level::orderBy('order')->get();
-        return view('web.dashboard', compact('subscribedLevels', 'levels'));
+        $subscribedLevels = $user->subscribedLevels;                // levels التي اشترك بها
+        $levels           = Level::orderBy('order')->get();         // كل المستويات
+        $coupons          = $user->coupons()->with('level')->get(); // كوبونات المستخدم مع المستوى المرتبط
+        return view('web.dashboard', compact('user', 'subscribedLevels', 'levels', 'coupons'));
     }
 }

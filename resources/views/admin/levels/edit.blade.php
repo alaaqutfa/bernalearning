@@ -11,7 +11,7 @@
         </div>
 
         <!-- بطاقة النموذج -->
-        <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden max-w-2xl">
+        <div class="bg-white rounded-lg shadow-sm border border-blue-500 overflow-hidden">
             <form method="POST" action="{{ route('admin.levels.update', $level) }}" class="p-6">
                 @csrf
                 @method('PUT')
@@ -30,7 +30,7 @@
                         </div>
                         <input type="text" id="title" name="title" value="{{ old('title', $level->title) }}"
                             required
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pr-10 p-2.5 @error('title') border-red-500 @enderror"
+                            class="bg-gray-50 border border-blue-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pr-10 p-2.5 @error('title') border-red-500 @enderror"
                             placeholder="أدخل عنوان المستوى">
                     </div>
                     @error('title')
@@ -51,7 +51,7 @@
                             </svg>
                         </div>
                         <textarea id="description" name="description" rows="4"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pr-10 p-2.5 @error('description') border-red-500 @enderror"
+                            class="bg-gray-50 border border-blue-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pr-10 p-2.5 @error('description') border-red-500 @enderror"
                             placeholder="أدخل وصف المستوى">{{ old('description', $level->description) }}</textarea>
                     </div>
                     @error('description')
@@ -74,7 +74,7 @@
                         </div>
                         <input type="number" id="price" name="price" value="{{ old('price', $level->price) }}"
                             step="0.01" min="0" required
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pr-10 p-2.5 @error('price') border-red-500 @enderror"
+                            class="bg-gray-50 border border-blue-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pr-10 p-2.5 @error('price') border-red-500 @enderror"
                             placeholder="0.00">
                     </div>
                     @error('price')
@@ -96,7 +96,7 @@
                         </div>
                         <input type="number" id="order" name="order" value="{{ old('order', $level->order) }}"
                             min="0"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pr-10 p-2.5 @error('order') border-red-500 @enderror"
+                            class="bg-gray-50 border border-blue-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pr-10 p-2.5 @error('order') border-red-500 @enderror"
                             placeholder="0">
                     </div>
                     <p class="mt-1 text-xs text-gray-500">تحديد ترتيب ظهور المستوى في القائمة (الأصغر يظهر أولاً)</p>
@@ -106,7 +106,7 @@
                 </div>
 
                 <!-- أزرار الإجراءات -->
-                <div class="flex items-center gap-3 border-t border-gray-200 pt-5">
+                <div class="flex items-center gap-3 border-t border-blue-200 pt-5">
                     <button type="submit"
                         class="inline-flex items-center px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg text-sm transition-colors duration-200">
                         <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">

@@ -8,12 +8,52 @@ class BunnyService
 {
     protected $libraryId;
     protected $apiKey;
-    protected $baseUrl = 'https://video.bunnycdn.com/library/';
+    protected $apiAccountKey;
+    protected $baseUrl             = 'https://video.bunnycdn.com/library/';
+    protected $baseVideolibraryUrl = 'https://api.bunny.net/videolibrary/';
+    protected $bunnyApiUrl         = 'https://api.bunny.net/';
 
     public function __construct()
     {
-        $this->libraryId = env('BUNNY_LIBRARY_ID');
-        $this->apiKey    = env('BUNNY_API_KEY');
+        $this->libraryId     = env('BUNNY_LIBRARY_ID');
+        $this->apiKey        = env('BUNNY_API_KEY');
+        $this->apiAccountKey = env('BUNNY_API_ACCOUNT');
+    }
+
+    public function getAccountStatistics($dateFrom = null, $dateTo = null)
+    {
+        $dateFrom = $dateFrom ?? now()->subDays(30)->format('Y-m-d');
+        $dateTo   = $dateTo ?? now()->format('Y-m-d');
+
+        $response = Http::withHeaders([
+            'AccessKey' => $this->apiAccountKey,
+            'Accept'    => 'application/json',
+        ])->get($this->bunnyApiUrl . 'statistics', [
+            'dateFrom' => $dateFrom,
+            'dateTo'   => $dateTo,
+        ]);
+
+        if ($response->failed()) {
+            dd([
+                'status' => $response->status(),
+                'body'   => $response->body(),
+            ]);
+            return null;
+        }
+        return $response->json();
+    }
+
+    public function getLibraryDetails()
+    {
+        $response = Http::withHeaders([
+            'AccessKey' => $this->apiKey,
+        ])->get($this->baseVideolibraryUrl . $this->libraryId);
+
+        if ($response->failed()) {
+            return null;
+        }
+
+        return $response->json();
     }
 
     /**
@@ -54,21 +94,33 @@ class BunnyService
         return $response->json();
     }
 
-    public function signedStreamUrl($guid, $expires = 3600)
+    public function signedStreamUrl($guid, $expires = 1800)
     {
         $libraryId = env('BUNNY_LIBRARY_ID');
         $secret    = env('BUNNY_SIGNING_SECRET');
+        if (! $secret) {
+            return "https://iframe.mediadelivery.net/embed/{$libraryId}/{$guid}";
+        }
+        $expiresAt = time() + $expires;
+        $token     = hash('sha256', $secret . $guid . $expiresAt);
+        return "https://iframe.mediadelivery.net/embed/{$libraryId}/{$guid}?token={$token}&expires={$expiresAt}";
+    }
+
+    public function signedThumbnailUrl($guid, $expires = 86400)
+    {
+        $thumbId = env('BUNNY_THUMB_ID');
+        $secret    = env('BUNNY_SIGNING_SECRET');
 
         if (! $secret) {
-            // إذا لم يكن هناك مفتاح، نرجع رابطاً عادياً (غير آمن)
-            return "https://iframe.mediadelivery.net/embed/{$libraryId}/{$guid}";
+            return "https://vz-{$thumbId}.b-cdn.net/{$guid}/thumbnail.jpg";
         }
 
         $expiresAt = time() + $expires;
-        $token     = hash_hmac('sha256', $libraryId . $guid . $expiresAt, $secret);
+        $path      = "/{$guid}/thumbnail.jpg";
+        $token     = hash('sha256', $secret . $path . $expiresAt);
 
-        // رابط المشغل المضمن (iframe)
-        return "https://iframe.mediadelivery.net/embed/{$libraryId}/{$guid}?token={$token}&expires={$expiresAt}";
+        // استخدام bcdn_token وإضافة token_path كما في الرابط الصحيح
+        return "https://vz-{$thumbId}.b-cdn.net{$path}?bcdn_token={$token}&expires={$expiresAt}&token_path=" . urlencode($path);
     }
 
     /**
@@ -81,5 +133,31 @@ class BunnyService
         ])->post($this->baseUrl . $this->libraryId . '/videos/' . $guid, $data);
 
         return $response->successful();
+    }
+
+    public function getVideoStatistics($videoId)
+    {
+        $response = Http::withHeaders([
+            'AccessKey' => $this->apiKey,
+        ])->get($this->baseUrl . $this->libraryId . '/videos/' . $videoId . '/statistics');
+
+        if ($response->failed()) {
+            return null;
+        }
+
+        return $response->json();
+    }
+
+    public function getLibraryStatistics()
+    {
+        $response = Http::withHeaders([
+            'AccessKey' => $this->apiKey,
+        ])->get($this->baseUrl . $this->libraryId . '/statistics');
+
+        if ($response->failed()) {
+            return null;
+        }
+
+        return $response->json();
     }
 }

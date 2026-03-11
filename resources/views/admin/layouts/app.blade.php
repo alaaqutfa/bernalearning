@@ -17,12 +17,13 @@
 
 <body>
     @include('admin.layouts.partials.header')
-    <main class="p-4 sm:mr-64 mt-35">
+    <main class="p-4 sm:ml-64 mt-20">
         @include('admin.layouts.partials.sidebar')
         @yield('content')
         @include('web.layouts.partials.footer')
     </main>
     <script src="https://cdn.jsdelivr.net/npm/flowbite@4.0.1/dist/flowbite.min.js"></script>
+    @stack('scripts')
 </body>
 
 </html>

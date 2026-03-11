@@ -1,4 +1,4 @@
-<header class="fixed top-0 z-50 w-full bg-blue-100/20 border-b border-blue-500">
+<header class="fixed top-0 z-50 w-full bg-neutral-primary-soft border-b border-blue-500 shadow shadow-blue-200">
     <div class="px-3 py-3 lg:px-5 lg:pl-3">
         <div class="flex items-center justify-between">
             <div class="flex items-center justify-start rtl:justify-end">
@@ -13,7 +13,7 @@
                     </svg>
                 </button>
                 <a href="{{ route('admin.dashboard') }}" class="flex ms-2 md:me-24">
-                    <img src="{{ asset('public/assets/img/logo.png') }}" class="h-24" alt="Berna Logo" />
+                    <img src="{{ asset('public/assets/img/logo.png') }}" class="h-16" alt="Berna Logo" />
                 </a>
             </div>
             <div class="flex items-center">
@@ -23,7 +23,7 @@
                             class="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
                             aria-expanded="false" data-dropdown-toggle="dropdown-user">
                             <span class="sr-only">فتح قائمة المستخدم</span>
-                            <p class="w-8 h-8 rounded-full bg-blue-300 text-white flex items-center justify-center">
+                            <p class="w-12 h-12 rounded-full bg-blue-300 text-white flex items-center justify-center">
                                 {{ Auth::user()->name[0] }}
                             </p>
                         </button>
@@ -47,9 +47,12 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="{{ route('logout') }}"
-                                    class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded"
-                                    role="menuitem">تسجيل الخروج</a>
+                                <form action="{{ route('logout') }}" method="POST">
+                                    @csrf
+                                    <button type="submit"
+                                        class="cursor-pointer inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded"
+                                        role="menuitem">تسجيل الخروج</button>
+                                </form>
                             </li>
                         </ul>
                     </div>

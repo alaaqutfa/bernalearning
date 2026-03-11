@@ -41,4 +41,28 @@ class User extends Authenticatable
         return $this->belongsToMany(Level::class, 'coupons')
             ->wherePivot('is_active', true);
     }
+
+    public function levels()
+    {
+        return $this->belongsToMany(Level::class, 'coupons')
+            ->withPivot(['code', 'is_active', 'price', 'profit_owner', 'profit_developer', 'created_at'])
+            ->withTimestamps();
+    }
+
+    public function watchedVideos()
+    {
+        return $this->hasMany(BunnyView::class)->where('completed', true);
+    }
+
+    // مجموع أرباح المطور من هذا المستخدم
+    public function getTotalDeveloperProfitAttribute()
+    {
+        return $this->coupons->sum('profit_developer');
+    }
+
+    // مجموع أرباح بيرنا من هذا المستخدم
+    public function getTotalOwnerProfitAttribute()
+    {
+        return $this->coupons->sum('profit_owner');
+    }
 }

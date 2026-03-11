@@ -1,10 +1,10 @@
 @php
     use Illuminate\Support\Facades\Auth;
 @endphp
-<header class="bg-neutral-primary h-34 fixed w-full z-20 top-0 start-0 border-b border-blue-500">
+<header class="bg-neutral-primary fixed w-full z-20 top-0 start-0 border-b border-blue-500 shadow shadow-blue-200">
     <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
         <a href="https://berna-violin.art/" class="flex items-center space-x-3 rtl:space-x-reverse">
-            <img src="{{ asset('public/assets/img/logo.png') }}" class="h-24" alt="Berna Logo" />
+            <img src="{{ asset('public/assets/img/logo.png') }}" class="h-16" alt="Berna Logo" />
         </a>
         <div class="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
             <button type="button"
@@ -12,7 +12,7 @@
                 id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown"
                 data-dropdown-placement="bottom">
                 <span class="sr-only">فتح قائمة المستخدم</span>
-                <p class="w-8 h-8 rounded-full bg-blue-300 text-white flex items-center justify-center">
+                <p class="w-12 h-12 rounded-full bg-blue-300 text-white flex items-center justify-center">
                     {{ Auth::user()->name[0] }}
                 </p>
             </button>
@@ -39,10 +39,12 @@
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('logout') }}"
-                            class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded">
-                            تسجيل الخروج
-                        </a>
+                        <form action="{{ route('logout') }}" method="POST">
+                            @csrf
+                            <button type="submit"
+                                class="cursor-pointer inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded"
+                                role="menuitem">تسجيل الخروج</button>
+                        </form>
                     </li>
                 </ul>
             </div>
@@ -58,9 +60,9 @@
         </div>
         <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-user">
             <ul
-                class="font-medium flex flex-col gap-3 p-4 md:p-0 mt-4 border border-blue-500 rounded-base bg-neutral-secondary-soft md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-neutral-primary">
+                class="font-medium flex flex-col gap-3 p-4 md:p-0 mt-4 border border-blue-500 rounded-base bg-neutral-secondary-soft md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-neutral-primary">
                 <li>
-                    <a href="https://berna-violin.art/"
+                    <a href="{{ route('dashboard') }}"
                         class="block py-2 px-3 text-white bg-brand rounded md:bg-transparent md:text-fg-brand md:p-0"
                         aria-current="page">الصفحة الرئيسية</a>
                 </li>

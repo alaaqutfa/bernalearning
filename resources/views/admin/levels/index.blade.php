@@ -7,12 +7,11 @@
         <!-- رأس الصفحة مع العنوان وزر الإضافة -->
         <div class="flex justify-between items-center mb-6">
             <h1 class="text-2xl font-bold text-gray-800">إدارة المستويات</h1>
-            <a href="{{ route('admin.levels.create') }}"
-                class="inline-flex items-center px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors duration-200">
-                <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <a href="{{ route('admin.levels.create') }}" title="إضافة مستوى جديد"
+                class="inline-flex items-center p-2 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors duration-200">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
                 </svg>
-                إضافة مستوى جديد
             </a>
         </div>
 
@@ -27,7 +26,7 @@
         @endif
 
         <!-- جدول المستويات -->
-        <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+        <div class="bg-white rounded-lg shadow-sm border border-blue-200 overflow-hidden">
             <div class="overflow-x-auto">
                 <table class="min-w-full divide-y divide-gray-200">
                     <thead class="bg-gray-50">
@@ -145,12 +144,3 @@
         @endif
     </div>
 @endsection
-
-@push('styles')
-    <style>
-        /* يمكن إضافة أي تنسيقات إضافية هنا إذا لزم الأمر */
-        .container {
-            direction: rtl;
-        }
-    </style>
-@endpush
