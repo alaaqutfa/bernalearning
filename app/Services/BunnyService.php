@@ -110,43 +110,32 @@ class BunnyService
         return "https://iframe.mediadelivery.net/embed/{$libraryId}/{$guid}?token={$token}&expires={$expiresAt}";
     }
 
-    public function signedThumbnailUrl($guid, $expires = 2592000) // 30 يوم
+    public function signedThumbnailUrl($guid, $expires = 2592000)
     {
         $secret      = env('BUNNY_SIGNING_SECRET');
-        $pullZone    = $this->pullZone;
         $cdnHostName = $this->cdnHostName;
 
-        if (! $secret || ! $pullZone) {
-            return "https://vz-{$pullZone}.b-cdn.net/{$guid}/thumbnail.jpg";
-        }
-
         $expiresAt = time() + $expires;
-        $path      = "/{$guid}/thumbnail.jpg";
 
-        $token = hash('sha256', $secret . $path . $expiresAt);
+        $tokenPath = "/{$guid}/";
+        $filePath  = "{$tokenPath}thumbnail.jpg";
 
-        $tokenPath = rawurlencode("/{$guid}/");
+        // التوقيع الصحيح
+        $token = hash('sha256', $secret . $tokenPath . $expiresAt);
 
-        return "https://{$cdnHostName}/bcdn_token={$token}&expires={$expiresAt}&token_path={$tokenPath}{$path}";
+        $encodedTokenPath = rawurlencode($tokenPath);
+
+        return "https://{$cdnHostName}/bcdn_token={$token}&expires={$expiresAt}&token_path={$encodedTokenPath}{$filePath}";
     }
     /*
         القيمة الصحيحة هي :
-        https://
-        vz-1d6b7983-037.b-cdn.net
         /bcdn_token=940pieXdukjHgtw4OrbpMrU1pts49xzAlQStXN-88kc
-        &expires=1773316732
-        &token_path=%2Ff347b2b5-044e-4138-9cb8-14a6cd2a810b%2F
-        /f347b2b5-044e-4138-9cb8-14a6cd2a810b/thumbnail.jpg
 
         =====================================
 
         القيمة الظاهرة حالياً
-        https://
-        vz-1d6b7983-037.b-cdn.net
-        /bcdn_token=db5af82ebf0c38775411f23a4ab6db2bddc2d16edea9a924ba771c7c9778f672
-        &expires=1775822844
-        &token_path=f347b2b5-044e-4138-9cb8-14a6cd2a810b
-        /f347b2b5-044e-4138-9cb8-14a6cd2a810b/thumbnail.jpg
+        /bcdn_token=7ed5a0eda1ce1f9cc9db1e09c63b510b01d2ec3056e06cdced3bf1771865ed85
+
     */
 
     /**
