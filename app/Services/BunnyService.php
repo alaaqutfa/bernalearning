@@ -112,33 +112,40 @@ class BunnyService
 
     public function signedThumbnailUrl($guid, $expires = 2592000)
     {
-        $secret         = env('BUNNY_SIGNING_SECRET');
-        $videoLibraryId = 613770;
-
-        $cdnHost = "vz-{$videoLibraryId}.b-cdn.net";
+        $secret  = env('BUNNY_SIGNING_SECRET');
+        $cdnHost = "vz-1d6b7983-037.b-cdn.net";
 
         $expiresAt = time() + $expires;
 
+        $filePath  = "/{$guid}/thumbnail.jpg";
         $tokenPath = "/{$guid}/";
-        $filePath  = "{$tokenPath}thumbnail.jpg";
 
-        $hash = hash('sha256', $secret . $tokenPath . $expiresAt, true);
-
+        // التوقيع الصحيح
+        $hash  = hash('sha256', $secret . $filePath . $expiresAt, true);
         $token = rtrim(strtr(base64_encode($hash), '+/', '-_'), '=');
 
         $encodedPath = rawurlencode($tokenPath);
 
-        return "https://{$cdnHost}/?bcdn_token={$token}&expires={$expiresAt}&token_path={$encodedPath}{$filePath}";
+        return "https://{$cdnHost}/bcdn_token={$token}&expires={$expiresAt}&token_path={$encodedPath}{$filePath}";
     }
     /*
-        القيمة الصحيحة هي :
-        /bcdn_token=940pieXdukjHgtw4OrbpMrU1pts49xzAlQStXN-88kc
+        القيمة الصحيحة من bunny هي :
+        https://
+        vz-1d6b7983-037.b-cdn.net
+        /bcdn_token=3kVDJB-emH2mtdUUcKrU99UY6UR49m0gJ5DEOh2lPoI
+        &expires=1773318181
+        &token_path=%2Ff347b2b5-044e-4138-9cb8-14a6cd2a810b%2F
+        /f347b2b5-044e-4138-9cb8-14a6cd2a810b/thumbnail.jpg
 
         =====================================
 
         القيمة الظاهرة حالياً
-        /bcdn_token=7ed5a0eda1ce1f9cc9db1e09c63b510b01d2ec3056e06cdced3bf1771865ed85
-
+        https://
+        vz-613770.b-cdn.net
+        /?bcdn_token=_MO8Szc569cYFMT3JhiC_bWvGubbBtmy2GlevCtGIt4
+        &expires=1775823747
+        &token_path=%2Ff347b2b5-044e-4138-9cb8-14a6cd2a810b%2F
+        /f347b2b5-044e-4138-9cb8-14a6cd2a810b/thumbnail.jpg
     */
 
     /**
