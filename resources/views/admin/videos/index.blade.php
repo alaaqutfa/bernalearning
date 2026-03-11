@@ -62,7 +62,7 @@
                             <tr class="hover:bg-blue-50">
                                 <td class="px-6 py-4 whitespace-nowrap">{{ $video->id }}</td>
                                 <td class="px-6 py-4 whitespace-nowrap">
-                                    <img src="{{ $thumbUrl }}" alt="{{ $vid->title }}"
+                                    <img src="{{ $thumbUrl }}" alt="{{ $video->title }}"
                                         class="w-40 h-24 object-cover rounded">
                                 </td>
                                 <td class="px-6 py-4">{{ $video->title }}</td>
