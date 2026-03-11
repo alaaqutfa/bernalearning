@@ -112,19 +112,21 @@ class BunnyService
 
     public function signedThumbnailUrl($guid, $expires = 2592000)
     {
-        $secret  = env('BUNNY_SIGNING_SECRET');
-        $cdnHost = env('BUNNY_CDN_HOST_NAME');
+        $securityKey = env('BUNNY_SIGNING_SECRET');
+        $cdnHost     = env('BUNNY_CDN_HOST_NAME');
 
         $expiresAt = time() + $expires;
 
-        $filePath  = "/{$guid}/thumbnail.jpg";
         $tokenPath = "/{$guid}/";
+        $filePath  = "{$tokenPath}thumbnail.jpg";
 
-        $signature = $secret . $filePath . $expiresAt;
+        // النص الذي سيتم توقيعه
+        $hashableBase = $securityKey . $filePath . $expiresAt;
 
-        $hash = hash('sha256', $signature, true);
-
-        $token = rtrim(strtr(base64_encode($hash), '+/', '-_'), '=');
+        $token = md5($hashableBase, true);
+        $token = base64_encode($token);
+        $token = strtr($token, '+/', '-_');
+        $token = str_replace('=', '', $token);
 
         $encodedTokenPath = rawurlencode($tokenPath);
 
