@@ -9,7 +9,7 @@
                     <a href="https://berna-violin.art/" class="hover:underline me-4 md:me-6">الخدمات</a>
                 </li>
                 <li>
-                    <a href="https://berna-violin.art/" class="hover:underline me-4 md:me-6">الدورات</a>
+                    <a href="{{ route('level.index') }}" class="hover:underline me-4 md:me-6">الدورات</a>
                 </li>
                 <li>
                     <a href="https://berna-violin.art/" class="hover:underline">أحجز موعداً</a>

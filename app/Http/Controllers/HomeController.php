@@ -23,7 +23,19 @@ class HomeController extends Controller
         return view('web.dashboard', compact('user', 'subscribedLevels', 'levels', 'coupons'));
     }
 
-    public function privacy(){
+    public function levels()
+    {
+        $user = Auth::user();
+        if ($user->is_admin) {
+            return redirect()->route('admin.dashboard');
+        }
+        $subscribedLevels = $user->subscribedLevels;
+        $levels = Level::orderBy('order')->get(); // كل المستويات
+        return view('web.level.index', compact('subscribedLevels','levels'));
+    }
+
+    public function privacy()
+    {
         return view('web.privacy');
     }
 }

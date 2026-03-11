@@ -31,6 +31,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
 
     // عرض المستوى والفيديو
+    Route::get('/levels/', [HomeController::class, 'levels'])->name('level.index');
     Route::get('/level/{level:slug}/{video?}', [LevelController::class, 'show'])->name('level.show');
 
     // تتبع المشاهدات

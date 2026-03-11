@@ -32,12 +32,12 @@
                             لوحة التحكم
                         </a>
                     </li>
-                    <li>
+                    {{-- <li>
                         <a href="#"
                             class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded">ملفي
                             الشخصي
                         </a>
-                    </li>
+                    </li> --}}
                     <li>
                         <form action="{{ route('logout') }}" method="POST">
                             @csrf
@@ -71,7 +71,7 @@
                         class="block py-2 px-3 text-heading rounded hover:bg-neutral-tertiary md:hover:bg-transparent md:border-0 md:hover:text-fg-brand md:p-0 md:dark:hover:bg-transparent">الخدمات</a>
                 </li>
                 <li>
-                    <a href="https://berna-violin.art/"
+                    <a href="{{ route('level.index') }}"
                         class="block py-2 px-3 text-heading rounded hover:bg-neutral-tertiary md:hover:bg-transparent md:border-0 md:hover:text-fg-brand md:p-0 md:dark:hover:bg-transparent">الدورات</a>
                 </li>
                 <li>
