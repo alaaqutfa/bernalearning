@@ -113,20 +113,22 @@ class BunnyService
     public function signedThumbnailUrl($guid, $expires = 2592000)
     {
         $secret  = env('BUNNY_SIGNING_SECRET');
-        $cdnHost = "vz-1d6b7983-037.b-cdn.net";
+        $cdnHost = env('BUNNY_CDN_HOST_NAME');
 
         $expiresAt = time() + $expires;
 
         $filePath  = "/{$guid}/thumbnail.jpg";
         $tokenPath = "/{$guid}/";
 
-        // التوقيع الصحيح
-        $hash  = hash('sha256', $secret . $filePath . $expiresAt, true);
+        $signature = $secret . $filePath . $expiresAt;
+
+        $hash = hash('sha256', $signature, true);
+
         $token = rtrim(strtr(base64_encode($hash), '+/', '-_'), '=');
 
-        $encodedPath = rawurlencode($tokenPath);
+        $encodedTokenPath = rawurlencode($tokenPath);
 
-        return "https://{$cdnHost}/bcdn_token={$token}&expires={$expiresAt}&token_path={$encodedPath}{$filePath}";
+        return "https://{$cdnHost}/bcdn_token={$token}&expires={$expiresAt}&token_path={$encodedTokenPath}{$filePath}";
     }
     /*
         القيمة الصحيحة من bunny هي :
@@ -141,9 +143,9 @@ class BunnyService
 
         القيمة الظاهرة حالياً
         https://
-        vz-613770.b-cdn.net
-        /?bcdn_token=_MO8Szc569cYFMT3JhiC_bWvGubbBtmy2GlevCtGIt4
-        &expires=1775823747
+        vz-1d6b7983-037.b-cdn.net
+        /bcdn_token=hCl1LiGF9HxF8a5VCulSrpEL9pBjoVv7pv7v5gJQCPU
+        &expires=1775824014
         &token_path=%2Ff347b2b5-044e-4138-9cb8-14a6cd2a810b%2F
         /f347b2b5-044e-4138-9cb8-14a6cd2a810b/thumbnail.jpg
     */
