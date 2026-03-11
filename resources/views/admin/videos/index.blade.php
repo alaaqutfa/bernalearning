@@ -56,11 +56,14 @@
                     </thead>
                     <tbody class="bg-white divide-y divide-blue-200">
                         @forelse($videos as $video)
+                            @php
+                                $thumbUrl = $bunny->signedThumbnailUrl($video->bunny_video_id, 2592000);
+                            @endphp
                             <tr class="hover:bg-blue-50">
                                 <td class="px-6 py-4 whitespace-nowrap">{{ $video->id }}</td>
                                 <td class="px-6 py-4 whitespace-nowrap">
-                                    <img src="https://vz-{{ env('BUNNY_LIBRARY_ID') }}.b-cdn.net/{{ $video->bunny_video_id }}/thumbnail.jpg"
-                                        alt="Thumbnail" class="w-16 h-10 object-cover rounded">
+                                    <img src="{{ $thumbUrl }}" alt="{{ $vid->title }}"
+                                        class="w-40 h-24 object-cover rounded">
                                 </td>
                                 <td class="px-6 py-4">{{ $video->title }}</td>
                                 <td class="px-6 py-4">{{ $video->level->title }}</td>

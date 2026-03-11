@@ -47,8 +47,7 @@
                                 class="flex items-start p-4 hover:bg-gray-50 transition {{ $isCurrent ? 'bg-blue-50 border-r-4 border-blue-500' : '' }}">
                                 <div class="flex-shrink-0 relative">
                                     <img src="{{ $thumbUrl }}" alt="{{ $vid->title }}"
-                                        class="w-40 h-24 object-cover rounded"
-                                        onerror="this.onerror=null; this.src='https://vz-{{ env('BUNNY_LIBRARY_ID') }}.b-cdn.net/{{ $vid->bunny_video_id }}/thumbnail.jpg'">
+                                        class="w-40 h-24 object-cover rounded">
                                     @if ($vid->duration)
                                         <span
                                             class="absolute bottom-1 right-1 bg-black bg-opacity-70 text-white text-xs px-1 rounded">
