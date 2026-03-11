@@ -132,25 +132,6 @@ class BunnyService
 
         return "https://{$cdnHost}/bcdn_token={$token}&expires={$expiresAt}&token_path={$encodedTokenPath}{$filePath}";
     }
-    /*
-        القيمة الصحيحة من bunny هي :
-        https://
-        vz-1d6b7983-037.b-cdn.net
-        /bcdn_token=3kVDJB-emH2mtdUUcKrU99UY6UR49m0gJ5DEOh2lPoI
-        &expires=1773318181
-        &token_path=%2Ff347b2b5-044e-4138-9cb8-14a6cd2a810b%2F
-        /f347b2b5-044e-4138-9cb8-14a6cd2a810b/thumbnail.jpg
-
-        =====================================
-
-        القيمة الظاهرة حالياً
-        https://
-        vz-1d6b7983-037.b-cdn.net
-        /bcdn_token=hCl1LiGF9HxF8a5VCulSrpEL9pBjoVv7pv7v5gJQCPU
-        &expires=1775824014
-        &token_path=%2Ff347b2b5-044e-4138-9cb8-14a6cd2a810b%2F
-        /f347b2b5-044e-4138-9cb8-14a6cd2a810b/thumbnail.jpg
-    */
 
     /**
      * تحديث عنوان الفيديو (اختياري)
