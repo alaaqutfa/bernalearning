@@ -15,12 +15,12 @@
                     <a href="https://berna-violin.art/" class="hover:underline">أحجز موعداً</a>
                 </li>
                 <li>
-                    <a href="#" class="hover:underline me-4 md:me-6">سياسة الخصوصية</a>
+                    <a href="{{ route('privacy') }}" class="hover:underline me-4 md:me-6">سياسة الخصوصية</a>
                 </li>
             </ul>
         </div>
         <hr class="my-6 border-blue-500 sm:mx-auto lg:my-8" />
-        <span class="block text-sm text-body sm:text-center">© 2026 <a href="https://berna-violin.art/"
-                class="hover:underline">Berna Dayoub</a>. All Rights Reserved.</span>
+        <span class="block text-sm text-body sm:text-center">© 2026 <a href="{{ route('privacy') }}"
+                class="hover:underline">{{ config('app.name') }}</a>. All Rights Reserved.</span>
     </div>
 </footer>

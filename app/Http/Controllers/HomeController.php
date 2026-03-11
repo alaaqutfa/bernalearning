@@ -22,4 +22,8 @@ class HomeController extends Controller
         $coupons          = $user->coupons()->with('level')->get(); // كوبونات المستخدم مع المستوى المرتبط
         return view('web.dashboard', compact('user', 'subscribedLevels', 'levels', 'coupons'));
     }
+
+    public function privacy(){
+        return view('web.privacy');
+    }
 }

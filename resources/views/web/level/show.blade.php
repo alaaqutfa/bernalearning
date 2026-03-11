@@ -5,14 +5,14 @@
 @section('content')
     <div class="container mx-auto px-4 py-8">
         <div class="flex flex-col lg:flex-row gap-6">
-            <!-- العمود الرئيسي: الفيديو والمعلومات -->
+            <!-- باقي المحتوى كما هو -->
             <div class="lg:w-2/3">
                 <!-- مشغل الفيديو -->
                 <div class="bg-black rounded-lg overflow-hidden shadow-lg mb-4">
                     @include('web.level.partials.video-player', [
                         'video' => $video,
                         'signedUrl' => $signedUrl,
-                        'user' => $user
+                        'user' => $user,
                     ])
                 </div>
 
@@ -27,6 +27,34 @@
                     </div>
                     <p class="text-sm text-gray-500">{{ $progressPercentage }}% مكتمل
                         ({{ count($watchedVideos) }}/{{ $videos->count() }})</p>
+
+                    <!-- رسالة تحذيرية قوية -->
+                    <div class="my-6 bg-red-50 border-r-4 border-red-500 p-4 rounded-lg shadow-lg animate-pulse">
+                        <div class="flex items-center">
+                            <div class="flex-shrink-0">
+                                <svg class="h-6 w-6 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                                </svg>
+                            </div>
+                            <div class="mr-3 flex-1">
+                                <h3 class="text-lg font-bold text-red-800 mb-1">⚠️ تنبيه هام - حقوق الملكية الفكرية محفوظة
+                                </h3>
+                                <p class="text-sm text-red-700 leading-relaxed">
+                                    <span class="font-bold">يمنع منعاً باتاً تصوير أو تسجيل أو تحميل أو مشاركة أو الاقتطاع
+                                        من هذه الفيديوهات بأي شكل من الأشكال.</span>
+                                    جميع محتويات هذه المنصة محمية بموجب قوانين حماية الملكية الفكرية وحقوق النشر.
+                                    المخالف سيتعرض للمساءلة القانونية والحذف الفوري من المنصة دون إنذار.
+                                </p>
+                            </div>
+                            <div class="flex-shrink-0">
+                                <span
+                                    class="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-red-200 text-red-800">
+                                    ممنوع النسخ
+                                </span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -83,7 +111,8 @@
                     return false;
                 }
                 // Ctrl+Shift+I / Ctrl+Shift+J / Ctrl+U
-                if (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'i' || e.key === 'j')) {
+                if (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'i' || e.key ===
+                        'j')) {
                     e.preventDefault();
                     return false;
                 }
