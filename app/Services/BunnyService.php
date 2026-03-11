@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Http;
 class BunnyService
 {
     protected $libraryId;
+    protected $cdnHostName;
     protected $pullZone;
     protected $apiKey;
     protected $apiAccountKey;
@@ -17,6 +18,7 @@ class BunnyService
     public function __construct()
     {
         $this->libraryId     = env('BUNNY_LIBRARY_ID');
+        $this->cdnHostName   = env('BUNNY_CDN_HOST_NAME');
         $this->pullZone      = env('BUNNY_PULL_ZONE');
         $this->apiKey        = env('BUNNY_API_KEY');
         $this->apiAccountKey = env('BUNNY_API_ACCOUNT');
@@ -110,8 +112,9 @@ class BunnyService
 
     public function signedThumbnailUrl($guid, $expires = 2592000) // 30 يوم
     {
-        $secret   = env('BUNNY_SIGNING_SECRET');
-        $pullZone = $this->pullZone;
+        $secret      = env('BUNNY_SIGNING_SECRET');
+        $pullZone    = $this->pullZone;
+        $cdnHostName = $this->cdnHostName;
 
         if (! $secret || ! $pullZone) {
             return "https://vz-{$pullZone}.b-cdn.net/{$guid}/thumbnail.jpg";
@@ -119,10 +122,32 @@ class BunnyService
 
         $expiresAt = time() + $expires;
         $path      = "/{$guid}/thumbnail.jpg";
-        $token     = hash('sha256', $secret . $path . $expiresAt);
 
-        return "https://vz-{$pullZone}.b-cdn.net{$path}?bcdn_token={$token}&expires={$expiresAt}&token_path=" . urlencode($path);
+        $token = hash('sha256', $secret . $path . $expiresAt);
+
+        $tokenPath = rawurlencode("/{$guid}/");
+
+        return "https://{$cdnHostName}/bcdn_token={$token}&expires={$expiresAt}&token_path={$tokenPath}{$path}";
     }
+    /*
+        القيمة الصحيحة هي :
+        https://
+        vz-1d6b7983-037.b-cdn.net
+        /bcdn_token=940pieXdukjHgtw4OrbpMrU1pts49xzAlQStXN-88kc
+        &expires=1773316732
+        &token_path=%2Ff347b2b5-044e-4138-9cb8-14a6cd2a810b%2F
+        /f347b2b5-044e-4138-9cb8-14a6cd2a810b/thumbnail.jpg
+
+        =====================================
+
+        القيمة الظاهرة حالياً
+        https://
+        vz-1d6b7983-037.b-cdn.net
+        /bcdn_token=db5af82ebf0c38775411f23a4ab6db2bddc2d16edea9a924ba771c7c9778f672
+        &expires=1775822844
+        &token_path=f347b2b5-044e-4138-9cb8-14a6cd2a810b
+        /f347b2b5-044e-4138-9cb8-14a6cd2a810b/thumbnail.jpg
+    */
 
     /**
      * تحديث عنوان الفيديو (اختياري)
