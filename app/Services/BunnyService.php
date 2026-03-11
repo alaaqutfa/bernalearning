@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Http;
 class BunnyService
 {
     protected $libraryId;
+    protected $pullZone;
     protected $apiKey;
     protected $apiAccountKey;
     protected $baseUrl             = 'https://video.bunnycdn.com/library/';
@@ -16,6 +17,7 @@ class BunnyService
     public function __construct()
     {
         $this->libraryId     = env('BUNNY_LIBRARY_ID');
+        $this->pullZone      = env('BUNNY_PULL_ZONE');
         $this->apiKey        = env('BUNNY_API_KEY');
         $this->apiAccountKey = env('BUNNY_API_ACCOUNT');
     }
@@ -106,21 +108,20 @@ class BunnyService
         return "https://iframe.mediadelivery.net/embed/{$libraryId}/{$guid}?token={$token}&expires={$expiresAt}";
     }
 
-    public function signedThumbnailUrl($guid, $expires = 86400)
+    public function signedThumbnailUrl($guid, $expires = 2592000) // 30 يوم
     {
-        $thumbId = env('BUNNY_THUMB_ID');
-        $secret    = env('BUNNY_SIGNING_SECRET');
+        $secret   = env('BUNNY_SIGNING_SECRET');
+        $pullZone = $this->pullZone;
 
-        if (! $secret) {
-            return "https://vz-{$thumbId}.b-cdn.net/{$guid}/thumbnail.jpg";
+        if (! $secret || ! $pullZone) {
+            return "https://vz-{$pullZone}.b-cdn.net/{$guid}/thumbnail.jpg";
         }
 
         $expiresAt = time() + $expires;
         $path      = "/{$guid}/thumbnail.jpg";
         $token     = hash('sha256', $secret . $path . $expiresAt);
 
-        // استخدام bcdn_token وإضافة token_path كما في الرابط الصحيح
-        return "https://vz-{$thumbId}.b-cdn.net{$path}?bcdn_token={$token}&expires={$expiresAt}&token_path=" . urlencode($path);
+        return "https://vz-{$pullZone}.b-cdn.net{$path}?bcdn_token={$token}&expires={$expiresAt}&token_path=" . urlencode($path);
     }
 
     /**
