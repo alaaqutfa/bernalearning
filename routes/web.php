@@ -28,7 +28,7 @@ Route::get('/privacy-policy', [HomeController::class, 'privacy'])->name('privacy
 // ==================== مسارات المستخدمين العاديين (محمية) ====================
 Route::middleware('auth')->group(function () {
     // الصفحة الرئيسية بعد تسجيل الدخول
-    Route::get('/dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
+    Route::get('/', [HomeController::class, 'dashboard'])->name('dashboard');
 
     // عرض المستوى والفيديو
     Route::get('/levels/', [HomeController::class, 'levels'])->name('level.index');
