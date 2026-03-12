@@ -177,7 +177,7 @@
         <!-- الرسم البياني للزيارات -->
         <div class="bg-white rounded-lg shadow-md p-6">
             <h2 class="text-xl font-semibold text-gray-900 mb-4">الزيارات اليومية (آخر 30 يوم)</h2>
-            <div class="relative" style="height: 400px;">
+            <div dir="ltr" class="relative" style="height: 400px;">
                 <canvas id="visitorsChart" class="absolute inset-0 w-full h-full"></canvas>
             </div>
         </div>
