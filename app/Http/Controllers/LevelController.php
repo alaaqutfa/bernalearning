@@ -40,8 +40,8 @@ class LevelController extends Controller
         // إنشاء رابط البث الموقع للفيديو الحالي
         $signedUrl = $this->bunnyService->signedStreamUrl($video->bunny_video_id);
 
-                                                // جلب حالة مشاهدة الفيديوهات للمستخدم الحالي
-        $watchedVideos = $user->watchedVideos() // نفترض وجود علاقة watchedVideos
+        // جلب حالة مشاهدة الفيديوهات للمستخدم الحالي
+        $watchedVideos = $user->watchedVideos()
             ->whereIn('video_id', $videos->pluck('id'))
             ->pluck('video_id')
             ->toArray();
@@ -55,9 +55,9 @@ class LevelController extends Controller
             'user',
             'level',
             'videos',
-            'video', // الفيديو الحالي
+            'video',
             'signedUrl',
-            'watchedVideos', // مصفوفة IDs الفيديوهات التي تمت مشاهدتها
+            'watchedVideos',
             'progressPercentage'
         ) + ['bunny' => $this->bunnyService]);
     }

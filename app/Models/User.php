@@ -39,7 +39,7 @@ class User extends Authenticatable
     public function subscribedLevels()
     {
         return $this->belongsToMany(Level::class, 'coupons')
-            ->wherePivot('is_active', true);
+            ->wherePivot('is_active', true)->with('videos');
     }
 
     public function levels()

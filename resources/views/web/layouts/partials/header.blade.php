@@ -63,20 +63,42 @@
                 class="font-medium flex flex-col gap-3 p-4 md:p-0 mt-4 border border-blue-500 rounded-base bg-neutral-secondary-soft md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-neutral-primary">
                 <li>
                     <a href="{{ route('dashboard') }}"
-                        class="block py-2 px-3 text-white bg-brand rounded md:bg-transparent md:text-fg-brand md:p-0"
-                        aria-current="page">الصفحة الرئيسية</a>
+                        class="block py-2 px-3 rounded md:p-0
+       {{ request()->routeIs('dashboard')
+           ? 'text-white bg-brand md:bg-transparent md:text-fg-brand'
+           : 'text-heading hover:bg-neutral-tertiary md:hover:bg-transparent md:hover:text-fg-brand' }}">
+                        الصفحة الرئيسية
+                    </a>
                 </li>
+
                 <li>
                     <a href="https://berna-violin.art/"
-                        class="block py-2 px-3 text-heading rounded hover:bg-neutral-tertiary md:hover:bg-transparent md:border-0 md:hover:text-fg-brand md:p-0 md:dark:hover:bg-transparent">الخدمات</a>
+                        class="block py-2 px-3 rounded md:p-0
+       {{ request()->is('/')
+           ? 'text-white bg-brand md:bg-transparent md:text-fg-brand'
+           : 'text-heading hover:bg-neutral-tertiary md:hover:bg-transparent md:hover:text-fg-brand' }}">
+                        الخدمات
+                    </a>
                 </li>
+
                 <li>
                     <a href="{{ route('level.index') }}"
-                        class="block py-2 px-3 text-heading rounded hover:bg-neutral-tertiary md:hover:bg-transparent md:border-0 md:hover:text-fg-brand md:p-0 md:dark:hover:bg-transparent">الدورات</a>
+                        class="block py-2 px-3 rounded md:p-0
+       {{ request()->routeIs('level.*')
+           ? 'text-white bg-brand md:bg-transparent md:text-fg-brand'
+           : 'text-heading hover:bg-neutral-tertiary md:hover:bg-transparent md:hover:text-fg-brand' }}">
+                        الدورات
+                    </a>
                 </li>
+
                 <li>
-                    <a href="https://berna-violin.art/"
-                        class="block py-2 px-3 text-heading rounded hover:bg-neutral-tertiary md:hover:bg-transparent md:border-0 md:hover:text-fg-brand md:p-0 md:dark:hover:bg-transparent">تواصل</a>
+                    <a href="https://berna-violin.art"
+                        class="block py-2 px-3 rounded md:p-0
+       {{ request()->is('contact')
+           ? 'text-white bg-brand md:bg-transparent md:text-fg-brand'
+           : 'text-heading hover:bg-neutral-tertiary md:hover:bg-transparent md:hover:text-fg-brand' }}">
+                        تواصل
+                    </a>
                 </li>
             </ul>
         </div>

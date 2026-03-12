@@ -38,10 +38,10 @@ class BunnyService
         ]);
 
         if ($response->failed()) {
-            dd([
-                'status' => $response->status(),
-                'body'   => $response->body(),
-            ]);
+            // dd([
+            //     'status' => $response->status(),
+            //     'body'   => $response->body(),
+            // ]);
             return null;
         }
         return $response->json();

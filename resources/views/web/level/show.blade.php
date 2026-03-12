@@ -84,8 +84,13 @@
                                         </span>
                                     @endif
                                     @if ($isWatched)
-                                        <span
-                                            class="absolute top-1 left-1 bg-green-500 text-white text-xs px-1 rounded">تمت</span>
+                                        <span class="absolute top-1 left-1 bg-green-500 text-white text-xs p-1 rounded-full">
+                                            <svg class="w-4 h-4 inline" fill="none" stroke="currentColor"
+                                                viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M5 13l4 4L19 7"></path>
+                                            </svg>
+                                        </span>
                                     @endif
                                 </div>
                                 <div class="mr-4 flex-1 min-w-0">
@@ -153,47 +158,6 @@
                     }, 200);
                 }
             });
-        })();
-    </script>
-    <script>
-        (function() {
-            // منع اختصارات لوحة المفاتيح
-            document.addEventListener('keydown', function(e) {
-                // F12
-                if (e.key === 'F12') {
-                    e.preventDefault();
-                    return false;
-                }
-                // Ctrl+Shift+I / Ctrl+Shift+J / Ctrl+U
-                if (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'i' || e.key ===
-                        'j')) {
-                    e.preventDefault();
-                    return false;
-                }
-                // Ctrl+U
-                if (e.ctrlKey && (e.key === 'U' || e.key === 'u')) {
-                    e.preventDefault();
-                    return false;
-                }
-            });
-
-            // منع النقر بزر الماوس الأيمن على الصفحة بأكملها
-            document.addEventListener('contextmenu', function(e) {
-                e.preventDefault();
-                return false;
-            });
-
-            // منع السحب والإفلات للفيديو
-            const video = document.getElementById('custom-video-player');
-            if (video) {
-                video.addEventListener('dragstart', (e) => e.preventDefault());
-                video.addEventListener('drop', (e) => e.preventDefault());
-            }
-
-            // تعطيل خاصية "picture-in-picture" عبر JS أيضاً
-            if (video) {
-                video.disablePictureInPicture = true;
-            }
         })();
     </script>
 @endpush

@@ -36,6 +36,9 @@ Route::middleware('auth')->group(function () {
 
     // تتبع المشاهدات
     Route::post('/track/view', [TrackViewController::class, 'store'])->name('track.view');
+    Route::post('/video/start', [TrackViewController::class, 'start'])->name('video.watch.start');
+    Route::post('/video/progress', [TrackViewController::class, 'progress'])->name('video.watch.progress');
+    Route::post('/video/complete', [TrackViewController::class, 'complete'])->name('video.watch.complete');
 });
 
 // ==================== مسارات الإدارة (محمية + شرط admin) ====================

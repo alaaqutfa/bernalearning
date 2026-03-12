@@ -20,10 +20,12 @@
                         @php
                             $videosCount = $level->videos_count ?? $level->videos->count();
                         @endphp
-                        <div class="bg-white rounded-xl shadow-md overflow-hidden border border-blue-500 hover:shadow-lg transition">
+                        <div
+                            class="bg-white rounded-xl shadow-md overflow-hidden border border-blue-500 hover:shadow-lg transition">
                             <div class="p-5">
                                 <h3 class="text-lg font-bold text-gray-800 mb-2">{{ $level->title }}</h3>
-                                <p class="text-gray-600 text-sm mb-3">{{ Str::limit($level->description, 80) }}</p>
+                                <p class="text-gray-600 text-sm mb-3 line-clamp-1" title="{{ $level->description }}">
+                                    {{ Str::limit($level->description, 80) }}</p>
                                 <div class="flex justify-between items-center mb-4">
                                     @if ($videosCount > 0)
                                         <span class="text-xl font-bold text-blue-600">
@@ -71,6 +73,36 @@
                                             قريباً...
                                         </span>
                                     @endif
+                                @endif
+                            </div>
+                            <div class="p-5 border-t border-blue-500 hover:shadow-lg transition">
+                                @if (count($level->videos) > 0)
+                                    <ul class="flex justify-start items-start flex-col gap-2">
+                                        @foreach ($level->videos as $video)
+                                            @php
+                                                $isWatched = in_array($video->id, $watchedVideoIds);
+                                            @endphp
+                                            <li
+                                                class="flex justify-start items-start gap-2 @if (!$isWatched) text-blue-500 hover:text-blue-600 @else text-green-500 hover:text-green-600 @endif h-4">
+                                                @if ($isWatched)
+                                                    <svg class="w-4 h-4 inline ml-1" fill="none" stroke="currentColor"
+                                                        viewBox="0 0 24 24">
+                                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                                            stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                                    </svg>
+                                                @else
+                                                    <svg class="w-4 h-4 inline ml-1" fill="none" stroke="currentColor"
+                                                        viewBox="0 0 24 24">
+                                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                                            stroke-width="2"
+                                                            d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z">
+                                                        </path>
+                                                    </svg>
+                                                @endif
+                                                <span class="text-sm">{{ $video->title }}</span>
+                                            </li>
+                                        @endforeach
+                                    </ul>
                                 @endif
                             </div>
                         </div>
