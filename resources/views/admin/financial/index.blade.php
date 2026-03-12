@@ -5,9 +5,9 @@
 @section('content')
     <div class="container mx-auto px-4 py-6">
         <!-- رأس الصفحة مع تحديد الشهر والسنة -->
-        <div class="flex justify-between items-center mb-6">
+        <div class="flex justify-between items-center gap-4 flex-wrap md:flex-nowrap mb-6">
             <h1 class="text-2xl font-bold text-gray-800">التقارير المالية</h1>
-            <div class="flex gap-2">
+            <div class="flex justify-center items-center gap-2 flex-col md:flex-row">
                 <form method="GET" class="flex gap-2">
                     <select name="month" class="w-32 border border-gray-300 rounded-lg px-3 py-2">
                         @for ($m = 1; $m <= 12; $m++)
