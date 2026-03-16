@@ -68,7 +68,7 @@
                     <div class="divide-y divide-gray-200 max-h-[600px] overflow-y-auto">
                         @foreach ($videos as $vid)
                             @php
-                                $thumbUrl = $bunny->signedThumbnailUrl($vid->bunny_video_id, 2592000); // 30 يوم
+                                $thumbUrl = $bunny->signedThumbnailUrl($vid->bunny_video_id, 2592000);
                                 $isWatched = in_array($vid->id, $watchedVideos);
                                 $isCurrent = $vid->id === $video->id;
                             @endphp
@@ -101,7 +101,7 @@
                         @endforeach
                         @if ($level->price == 0)
                             <a href="{{ route('level.index') }}"
-                                class="flex items-start p-4 hover:bg-gray-50 transition bg-blue-50 border-r-4 border-blue-500">
+                                class="flex items-start p-4 hover:bg-gray-50 transition bg-blue-50 border-r-4 border-blue-500 text-blue-900">
                                 لمشاهدة المستوى {{ $level->title }} كاملاً يرجي الأشتراك
                             </a>
                         @endif
