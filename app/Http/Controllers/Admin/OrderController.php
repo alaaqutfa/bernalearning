@@ -2,10 +2,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Order;
 use App\Models\Coupon;
+use App\Models\Expense;
+use App\Models\Order;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Mail; // optional
+
+// optional
 
 class OrderController extends Controller
 {
@@ -38,10 +40,10 @@ class OrderController extends Controller
         ]);
 
         $order->update([
-            'payment_link' => $request->payment_link,
+            'payment_link'            => $request->payment_link,
             'payment_link_created_at' => now(),
-            'status' => 'payment_link_added',
-            'notes' => $request->notes,
+            'status'                  => 'payment_link_added',
+            'notes'                   => $request->notes,
         ]);
 
         // يمكن إرسال إشعار للمستخدم (اختياري)
@@ -57,20 +59,31 @@ class OrderController extends Controller
             return back()->with('error', 'الطلب ليس بانتظار المراجعة.');
         }
 
+        $whishFee = $order->price * 0.04;
+        $netPrice = $order->price - $whishFee;
+
         // إنشاء كوبون للمستخدم
         $coupon = Coupon::create([
-            'code' => strtoupper(uniqid('BL-')),
-            'user_id' => $order->user_id,
-            'level_id' => $order->level_id,
-            'price' => $order->amount,
-            'profit_owner' => $order->amount * 0.75,
+            'code'             => strtoupper(uniqid('BL-')),
+            'user_id'          => $order->user_id,
+            'level_id'         => $order->level_id,
+            'price'            => $order->amount,
+            'profit_owner'     => $order->amount * 0.75,
             'profit_developer' => $order->amount * 0.25,
-            'is_active' => true,
+            'is_active'        => true,
+        ]);
+
+        Expense::create([
+            'title'        => 'عمولة دفع Whish للطلب #' . $order->id,
+            'amount'       => $whishFee,
+            'type'         => 'other', // أو 'payment_gateway'
+            'expense_date' => now(),
+            'description'  => 'عمولة 4% على عملية الدفع عبر Whish',
         ]);
 
         $order->update([
             'status' => 'paid',
-            'notes' => $request->notes,
+            'notes'  => $request->notes,
         ]);
 
         // يمكن إرسال إشعار للمستخدم
@@ -84,7 +97,7 @@ class OrderController extends Controller
     {
         $order->update([
             'status' => 'cancelled',
-            'notes' => $request->notes,
+            'notes'  => $request->notes,
         ]);
 
         return back()->with('success', 'تم إلغاء الطلب.');
