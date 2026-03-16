@@ -34,7 +34,7 @@
                         </div>
                         <input type="text" id="name" name="name" value="{{ old('name') }}"
                             class="bg-gray-50 border border-blue-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pr-10 p-2.5 @error('name') border-red-500 @enderror"
-                            placeholder="أدخل اسم المستخدم (اختياري)">
+                            placeholder="أدخل اسم المستخدم">
                     </div>
                     @error('name')
                         <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
@@ -224,7 +224,7 @@
                     phoneInput.value = iti.getNumber();
                 }
             });
-            
+
             // اختيارياً: عند تغيير الحقل، إزالة رسالة الخطأ
             phoneInput.addEventListener('input', function() {
                 phoneError.classList.add('hidden');
