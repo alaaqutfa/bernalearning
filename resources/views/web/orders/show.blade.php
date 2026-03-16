@@ -60,7 +60,8 @@
             <div class="bg-purple-50 border border-purple-200 rounded p-4">
                 <p class="text-purple-700">تم رفع الإيصال، وهو قيد المراجعة من قبل الإدارة. سيتم تفعيل اشتراكك بعد التأكيد.</p>
                 @if($order->receipt_image)
-                    <p class="mt-2"><a href="{{ Storage::url($order->receipt_image) }}" target="_blank" class="text-blue-600">عرض الإيصال</a></p>
+                {{-- https://berna-violin.art/storage/receipts/XDeMvfhfI4jCANd4zti8Z2EYcFOWyLhMoXoq7a5T.png --}}
+                    <p class="mt-2"><a href="{{ asset("storage/receipts/".$order->receipt_image) }}" target="_blank" class="text-blue-600">عرض الإيصال</a></p>
                 @endif
             </div>
         @endif
