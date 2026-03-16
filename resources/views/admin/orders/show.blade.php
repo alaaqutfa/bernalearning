@@ -64,7 +64,7 @@
             <h2 class="text-lg font-bold mb-4">مراجعة الإيصال وتأكيد الدفع</h2>
             @if($order->receipt_image)
                 <div class="mb-4">
-                    <img src="{{ Storage::url($order->receipt_image) }}" alt="Receipt" class="max-w-md border">
+                    <img src="{{ asset("storage/app/public/".$order->receipt_image) }}" alt="Receipt" class="max-w-md border">
                 </div>
             @endif
             <form action="{{ route('admin.orders.confirm-payment', $order) }}" method="POST">

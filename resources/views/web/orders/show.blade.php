@@ -61,7 +61,7 @@
                 <p class="text-purple-700">تم رفع الإيصال، وهو قيد المراجعة من قبل الإدارة. سيتم تفعيل اشتراكك بعد التأكيد.</p>
                 @if($order->receipt_image)
                 {{-- https://berna-violin.art/storage/receipts/XDeMvfhfI4jCANd4zti8Z2EYcFOWyLhMoXoq7a5T.png --}}
-                    <p class="mt-2"><a href="{{ asset("storage/receipts/".$order->receipt_image) }}" target="_blank" class="text-blue-600">عرض الإيصال</a></p>
+                    <p class="mt-2"><a href="{{ asset("storage/app/public/".$order->receipt_image) }}" target="_blank" class="text-blue-600">عرض الإيصال</a></p>
                 @endif
             </div>
         @endif
