@@ -59,8 +59,8 @@ class OrderController extends Controller
             return back()->with('error', 'الطلب ليس بانتظار المراجعة.');
         }
 
-        $whishFee = $order->price * 0.04;
-        $netPrice = $order->price - $whishFee;
+        $whishFee = $order->amount * 0.04;
+        $netPrice = $order->amount - $whishFee;
 
         // إنشاء كوبون للمستخدم
         $coupon = Coupon::create([

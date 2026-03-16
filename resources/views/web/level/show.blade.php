@@ -21,6 +21,13 @@
                     <h1 class="text-2xl font-bold text-gray-900 mb-2">{{ $level->title }}</h1>
                     <p class="text-gray-600 mb-4">{{ $level->description }}</p>
 
+                        @if ($level->price == 0)
+                    <a href="{{ route('level.index') }}"
+                        class="flex items-start p-4 my-4 hover:bg-gray-50 transition bg-blue-50 border-4 border-blue-500 text-blue-900">
+                        لمشاهدة المستوى {{ $level->title }} كاملاً يرجي الأشتراك بالضغط هنا
+                    </a>
+                    @endif
+
                     <!-- شريط تقدم المستوى -->
                     <div class="w-full bg-gray-200 rounded-full h-2.5 mb-4">
                         <div class="bg-blue-600 h-2.5 rounded-full" style="width: {{ $progressPercentage }}%"></div>
@@ -102,7 +109,7 @@
                         @if ($level->price == 0)
                             <a href="{{ route('level.index') }}"
                                 class="flex items-start p-4 hover:bg-gray-50 transition bg-blue-50 border-r-4 border-blue-500 text-blue-900">
-                                لمشاهدة المستوى {{ $level->title }} كاملاً يرجي الأشتراك
+                                لمشاهدة المستوى {{ $level->title }} كاملاً يرجي الأشتراك بالضغط هنا
                             </a>
                         @endif
                     </div>
