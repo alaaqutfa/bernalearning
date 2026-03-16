@@ -12,7 +12,7 @@
 
         <!-- بطاقة النموذج -->
         <div class="bg-white rounded-lg shadow-sm border border-blue-500 overflow-hidden">
-            <form method="POST" action="{{ route('admin.users.update', $user) }}" class="p-6">
+            <form method="POST" action="{{ route('admin.users.update', $user) }}" class="p-6" id="edit-user-form">
                 @csrf
                 @method('PUT')
 
@@ -59,26 +59,19 @@
                     @enderror
                 </div>
 
-                <!-- حقل رقم الهاتف -->
+                <!-- حقل رقم الهاتف (مع مكتبة intl-tel-input) -->
                 <div class="mb-5">
                     <label for="phone" class="block mb-2 text-sm font-medium text-gray-900">
                         رقم الهاتف
                     </label>
-                    <div class="relative">
-                        <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
-                            <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z">
-                                </path>
-                            </svg>
-                        </div>
-                        <input type="text" id="phone" name="phone" value="{{ old('phone', $user->phone) }}"
-                            class="bg-gray-50 border border-blue-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pr-10 p-2.5 @error('phone') border-red-500 @enderror"
-                            placeholder="+961 00 000 000">
-                    </div>
+                    <!-- تمت إزالة الأيقونة الثابتة لتجنب التعارض -->
+                    <input type="tel" id="phone" name="phone" value="{{ old('phone', $user->phone) }}"
+                        class="bg-gray-50 border border-blue-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 @error('phone') border-red-500 @enderror"
+                        placeholder="رقم الهاتف">
                     @error('phone')
                         <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
                     @enderror
+                    <div id="phone-error" class="text-red-600 text-sm mt-1 hidden"></div>
                 </div>
 
                 <!-- حقل كلمة المرور (اختياري في التعديل) -->
@@ -145,3 +138,82 @@
         </div>
     </div>
 @endsection
+
+@push('styles')
+    <!-- إضافة CSS لمكتبة intl-tel-input -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css" />
+    <style>
+        .iti {
+            width: 100%;
+            direction: ltr;
+        }
+        .iti__selected-flag {
+            padding: 0 6px 0 12px;
+            border-radius: 8px 0 0 8px;
+        }
+        .iti--allow-dropdown input, .iti--allow-dropdown input[type=tel] {
+            padding-right: 6px;
+            padding-left: 52px;
+            border-radius: 8px;
+        }
+        .iti__country-list {
+            z-index: 50;
+            width: 300px;
+            max-width: 80vw;
+        }
+    </style>
+@endpush
+
+@push('scripts')
+    <!-- إضافة JavaScript لمكتبة intl-tel-input -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
+    <script>
+        (function() {
+            const phoneInput = document.querySelector("#phone");
+            if (!phoneInput) return;
+
+            // تهيئة مكتبة intl-tel-input
+            const iti = window.intlTelInput(phoneInput, {
+                initialCountry: "lb",
+                preferredCountries: ["lb", "sa", "ae", "us", "gb"],
+                utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
+                separateDialCode: true,
+                formatOnDisplay: true,
+                autoPlaceholder: "aggressive",
+                nationalMode: false,
+            });
+
+            // إذا كان هناك رقم قديم، قم بتعيينه بعد التهيئة
+            @if(old('phone', $user->phone))
+                iti.setNumber('{{ old('phone', $user->phone) }}');
+            @endif
+
+            const form = document.getElementById('edit-user-form');
+            const phoneError = document.getElementById('phone-error');
+
+            form.addEventListener('submit', function(e) {
+                // إخفاء رسالة الخطأ السابقة
+                phoneError.classList.add('hidden');
+                phoneError.textContent = '';
+
+                // التحقق إذا كان الحقل غير فارغ
+                if (phoneInput.value.trim() !== '') {
+                    if (!iti.isValidNumber()) {
+                        e.preventDefault();
+                        phoneError.textContent = 'رقم الهاتف غير صحيح. يرجى التحقق من الرقم.';
+                        phoneError.classList.remove('hidden');
+                        phoneInput.focus();
+                        return;
+                    }
+                    // تعيين القيمة إلى الرقم الدولي الكامل (مع رمز البلد)
+                    phoneInput.value = iti.getNumber();
+                }
+            });
+
+            // اختيارياً: عند تغيير الحقل، إزالة رسالة الخطأ
+            phoneInput.addEventListener('input', function() {
+                phoneError.classList.add('hidden');
+            });
+        })();
+    </script>
+@endpush

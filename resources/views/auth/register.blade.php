@@ -153,22 +153,28 @@
         /* تخصيص مظهر الحقل ليتناسب مع التصميم RTL */
         .iti {
             width: 100%;
-            direction: ltr; /* لأن الأرقام تكون من اليسار لليمين */
+            direction: ltr;
+            /* لأن الأرقام تكون من اليسار لليمين */
         }
+
         .iti__selected-flag {
             padding: 0 6px 0 12px;
             border-radius: 8px 0 0 8px;
         }
-        .iti--allow-dropdown input, .iti--allow-dropdown input[type=tel] {
+
+        .iti--allow-dropdown input,
+        .iti--allow-dropdown input[type=tel] {
             padding-right: 6px;
             padding-left: 52px;
             border-radius: 8px;
         }
+
         /* تعديل موضع الأيقونة الداخلية (الظل) */
         .relative .absolute.inset-y-0.right-0 {
             left: auto;
             right: 0;
         }
+
         /* جعل القائمة المنسدلة للدول تظهر بشكل صحيح */
         .iti__country-list {
             z-index: 50;
@@ -203,13 +209,10 @@
             const phoneError = document.getElementById('phone-error');
 
             form.addEventListener('submit', function(e) {
-                // إخفاء رسالة الخطأ السابقة
                 phoneError.classList.add('hidden');
                 phoneError.textContent = '';
 
-                // التحقق إذا كان الحقل غير فارغ
                 if (phoneInput.value.trim() !== '') {
-                    // التحقق من صحة الرقم باستخدام المكتبة
                     if (!iti.isValidNumber()) {
                         e.preventDefault();
                         phoneError.textContent = 'رقم الهاتف غير صحيح. يرجى التحقق من الرقم.';
@@ -217,13 +220,11 @@
                         phoneInput.focus();
                         return;
                     }
+                    // تعيين القيمة إلى الرقم الدولي الكامل (مع رمز البلد)
+                    phoneInput.value = iti.getNumber();
                 }
-
-                // إذا كان الحقل فارغاً، نسمح بالإرسال (لأنه يمكن استخدام البريد الإلكتروني فقط)
-                // يمكن إضافة شرط إضافي للتأكد من أن المستخدم أدخل إما البريد أو الهاتف
-                // لكن هذا سيتم التحقق منه في السيرفر.
             });
-
+            
             // اختيارياً: عند تغيير الحقل، إزالة رسالة الخطأ
             phoneInput.addEventListener('input', function() {
                 phoneError.classList.add('hidden');
