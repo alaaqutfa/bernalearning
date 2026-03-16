@@ -32,7 +32,7 @@ class HomeController extends Controller
             return redirect()->route('admin.dashboard');
         }
 
-        $levels = Level::with('videos')->orderBy('order')->get();
+        $levels = Level::where('publish',true)->with('videos')->orderBy('order')->get();
 
         $watchedVideoIds = $user->watchedVideos()->pluck('video_id')->toArray();
 
