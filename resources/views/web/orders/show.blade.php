@@ -1,5 +1,7 @@
 @extends('web.layouts.app')
 
+@section('title', 'تفاصيل الطلب #'.$order->id)
+
 @section('content')
 <div class="container mx-auto px-4 py-8 max-w-2xl">
     <h1 class="text-2xl font-bold mb-6">تفاصيل الطلب #{{ $order->id }}</h1>
