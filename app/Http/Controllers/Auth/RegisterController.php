@@ -3,6 +3,8 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\Level;
+use App\Models\Coupon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -27,8 +29,6 @@ class RegisterController extends Controller
             'email'    => 'nullable|email|unique:users,email',
             'phone'    => 'nullable|string|unique:users,phone',
             'password' => 'required|string|min:6|confirmed',
-            // 'level_ids'   => 'required|array|min:1',
-            // 'level_ids.*' => 'exists:levels,id',
         ]);
 
         if (! $request->email && ! $request->phone) {
@@ -42,6 +42,33 @@ class RegisterController extends Controller
             'password' => Hash::make($request->password),
             'is_admin' => false,
         ]);
+
+        // إنشاء كوبون لكل مستوى مختار
+        $levels = Level::where('price', 0)->get();
+        foreach ($levels as $level) {
+            do {
+                $code = strtoupper(uniqid('BL-'));
+            } while (Coupon::where('code', $code)->exists());
+
+            $price = $level->price;
+            $profitOwner = $price * 0.75;
+            $profitDeveloper = $price * 0.25;
+
+            $coupon = Coupon::create([
+                'code'      => $code,
+                'user_id'   => $user->id,
+                'level_id'  => $level->id,
+                'price'     => $price,
+                'profit_owner' => $profitOwner,
+                'profit_developer' => $profitDeveloper,
+                'is_active' => true,
+            ]);
+
+            // إرسال الكوبون (اختياري)
+            // if ($request->email) {
+            //     Mail::to($request->email)->queue(new CouponCreated($coupon));
+            // }
+        }
 
         Auth::login($user);
 

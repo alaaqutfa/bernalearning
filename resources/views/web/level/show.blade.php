@@ -84,7 +84,8 @@
                                         </span>
                                     @endif
                                     @if ($isWatched)
-                                        <span class="absolute top-1 left-1 bg-green-500 text-white text-xs p-1 rounded-full">
+                                        <span
+                                            class="absolute top-1 left-1 bg-green-500 text-white text-xs p-1 rounded-full">
                                             <svg class="w-4 h-4 inline" fill="none" stroke="currentColor"
                                                 viewBox="0 0 24 24">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -98,6 +99,12 @@
                                 </div>
                             </a>
                         @endforeach
+                        @if ($level->price == 0)
+                            <a href="{{ route('level.index') }}"
+                                class="flex items-start p-4 hover:bg-gray-50 transition bg-blue-50 border-r-4 border-blue-500">
+                                لمشاهدة المستوى {{ $level->title }} كاملاً يرجي الأشتراك
+                            </a>
+                        @endif
                     </div>
                 </div>
             </div>
