@@ -12,6 +12,7 @@
     <!-- Styles -->
     <link href="https://cdn.jsdelivr.net/npm/flowbite@4.0.1/dist/flowbite.min.css" rel="stylesheet" />
     <link href="{{ asset('public/assets/css/app.css') }}" rel="stylesheet" />
+    @stack('styles')
 </head>
 
 <body>
@@ -45,6 +46,7 @@
         <div class="h-14.5 hidden lg:block"></div>
     @endif --}}
     <script src="https://cdn.jsdelivr.net/npm/flowbite@4.0.1/dist/flowbite.min.js"></script>
+    @stack('scripts')
 </body>
 
 </html>

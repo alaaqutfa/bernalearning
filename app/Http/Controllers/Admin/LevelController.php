@@ -44,6 +44,7 @@ class LevelController extends Controller
             'price'       => $request->price,
             'slug'        => Str::slug($request->title), // توليد slug فريد
             'order'       => $request->order ?? 0,
+            'publish'      => $request->publish ?? false,
         ]);
 
         return redirect()->route('admin.levels.index')->with('success', 'تم إضافة المستوى بنجاح.');
@@ -75,6 +76,7 @@ class LevelController extends Controller
             'price'       => $request->price,
             'slug'        => Str::slug($request->title), // تحديث slug
             'order'       => $request->order ?? $level->order,
+            'publish'      => $request->publish ?? $level->publish,
         ]);
 
         return redirect()->route('admin.levels.index')->with('success', 'تم تحديث المستوى بنجاح.');

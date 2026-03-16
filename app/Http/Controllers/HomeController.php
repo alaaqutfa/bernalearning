@@ -48,7 +48,7 @@ class HomeController extends Controller
 
         $subscribedLevels = $user->subscribedLevels;
 
-        return view('web.level.index', compact('levels', 'subscribedLevels','watchedVideoIds'));
+        return view('web.level.index', compact('user','levels', 'subscribedLevels','watchedVideoIds'));
     }
 
     public function privacy()

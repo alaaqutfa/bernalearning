@@ -5,6 +5,9 @@
 @section('content')
     <div class="min-h-screen flex items-center justify-center bg-gray-100 p-4">
         <div class="w-full max-w-md bg-white rounded-lg shadow-xs p-6">
+            <a href="https://berna-violin.art/" class="flex items-center space-x-3 rtl:space-x-reverse">
+                <img src="{{ asset('public/assets/img/full-logo.png') }}" class="h-24" alt="Berna Logo" />
+            </a>
             <h2 class="text-2xl font-bold text-gray-900 mb-2">تسجيل الدخول</h2>
             <p class="text-gray-600 text-sm mb-6">أدخل بريدك الإلكتروني أو رقم هاتفك وكلمة المرور</p>
 
@@ -55,9 +58,14 @@
                 </button>
 
 
-                <a href="https://berna-violin.art/" class="font-medium text-fg-brand underline hover:no-underline">
-                    الصفحة الرئيسية
-                </a>
+                <div class="flex justify-start items-center gap-2 flex-wrap">
+                    <a href="{{ route('register') }}" class="font-medium text-fg-brand underline hover:no-underline">
+                        ليس لديك حساب ؟
+                    </a>
+                    <a href="https://berna-violin.art/" class="font-medium text-fg-brand underline hover:no-underline">
+                        الصفحة الرئيسية
+                    </a>
+                </div>
 
             </form>
         </div>

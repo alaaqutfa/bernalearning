@@ -65,4 +65,9 @@ class User extends Authenticatable
     {
         return $this->coupons->sum('profit_owner');
     }
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
 }

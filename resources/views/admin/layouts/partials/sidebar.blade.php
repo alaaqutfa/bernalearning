@@ -19,6 +19,7 @@
                     </svg>
                 </a>
             </li>
+            <!-- التقارير المالية -->
             <li>
                 <a href="{{ route('admin.financial.index') }}"
                     class="flex items-center px-2 py-1.5 text-body rounded-base hover:bg-neutral-tertiary hover:text-fg-brand group">
@@ -46,6 +47,19 @@
                         class="bg-neutral-secondary-medium border border-blue-500 text-heading text-xs font-medium px-1.5 py-0.5 rounded-sm">Pro</span> --}}
                 </a>
             </li>
+            <!-- الفيديوهات -->
+            <li>
+                <a href="{{ route('admin.videos.index') }}"
+                    class="flex items-center px-2 py-1.5 text-body rounded-base hover:bg-neutral-tertiary hover:text-fg-brand group">
+                    <span class="flex-1 ms-3 whitespace-nowrap">الفيديوهات</span>
+
+                    <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z">
+                        </path>
+                    </svg>
+                </a>
+            </li>
             <!-- الطلاب -->
             <li>
                 <a href="{{ route('admin.users.index') }}"
@@ -61,16 +75,22 @@
                         class="inline-flex items-center justify-center w-4.5 h-4.5 ms-2 text-xs font-medium text-fg-danger-strong bg-danger-soft border border-danger-subtle rounded-full">2</span> --}}
                 </a>
             </li>
-            <!-- الفيديوهات -->
+            <!-- الطلبات -->
             <li>
-                <a href="{{ route('admin.videos.index') }}"
+                <a href="{{ route('admin.orders.index') }}"
                     class="flex items-center px-2 py-1.5 text-body rounded-base hover:bg-neutral-tertiary hover:text-fg-brand group">
-                    <span class="flex-1 ms-3 whitespace-nowrap">الفيديوهات</span>
-
-                    <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z">
-                        </path>
+                    <span class="flex-1 ms-3 whitespace-nowrap">الطلبات</span>
+                    @if ($pendingOrdersCount > 0)
+                        <span
+                            class="inline-flex items-center justify-center w-4.5 h-4.5 ml-2 text-xs font-medium text-fg-danger-strong bg-danger-soft border border-danger-subtle rounded-full">
+                            {{ $pendingOrdersCount }}
+                        </span>
+                    @endif
+                    <svg class="shrink-0 w-5 h-5 transition duration-75 group-hover:text-fg-brand" aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                        viewBox="0 0 24 24">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M5 4h14a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1Zm0 6h14M5 14h14M5 18h6" />
                     </svg>
                 </a>
             </li>

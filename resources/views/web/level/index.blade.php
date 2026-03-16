@@ -54,19 +54,18 @@
                                         </svg>
                                         مشترك بالفعل
                                     </span>
+                                @elseif($existingPendingOrder = $user->orders()->where('level_id', $level->id)->whereNotIn('status', ['paid', 'cancelled'])->first())
+                                    <a href="{{ route('orders.show', $existingPendingOrder) }}"
+                                        class="inline-block w-full text-center bg-yellow-500 text-white px-4 py-2 rounded-lg">متابعة الطلب الحالي</a>
                                 @else
                                     @if ($videosCount > 0)
-                                        <a href="https://wa.me/+96181139596?text={{ urlencode('أرغب بالاشتراك في دورة ' . $level->title) }}"
-                                            target="_blank"
-                                            class="inline-flex items-center justify-center w-full px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm rounded-lg transition">
-                                            <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor"
-                                                viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                    d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z">
-                                                </path>
-                                            </svg>
-                                            اشترك الآن عبر واتساب
-                                        </a>
+                                        <form method="POST" action="{{ route('orders.store') }}">
+                                            @csrf
+                                            <input type="hidden" name="level_id" value="{{ $level->id }}">
+                                            <button type="submit"
+                                                class="cursor-pointer inline-block w-full text-center bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">اشترك
+                                                الآن</button>
+                                        </form>
                                     @else
                                         <span
                                             class="cursor-pointer inline-block w-full text-center px-4 py-2 bg-yellow-100 text-yellow-600 rounded-lg text-sm">

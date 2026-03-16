@@ -105,6 +105,17 @@
                     @enderror
                 </div>
 
+                <!-- نشر (Publish) -->
+                <div class="flex items-start mb-6">
+                    <div class="flex items-center h-5">
+                        <input id="publish" name="publish" type="checkbox" value="{{ old('publish', $level->publish) }}"
+                            class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300">
+                    </div>
+                    <label for="publish" class="ms-2 text-sm font-medium text-gray-900">
+                        نشر
+                    </label>
+                </div>
+
                 <!-- أزرار الإجراءات -->
                 <div class="flex items-center gap-3 border-t border-blue-200 pt-5">
                     <button type="submit"
