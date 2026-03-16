@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
@@ -38,13 +37,17 @@ class LevelController extends Controller
             'order'       => 'nullable|integer',
         ]);
 
+        $slug  = Str::slug($request->title);
+        $count = Level::where('slug', 'LIKE', "$slug%")->count();
+        $slug  = $count ? "{$slug}-{$count}" : $slug;
+
         Level::create([
             'title'       => $request->title,
             'description' => $request->description,
             'price'       => $request->price,
-            'slug'        => Str::slug($request->title), // توليد slug فريد
+            'slug'        => $slug,
             'order'       => $request->order ?? 0,
-            'publish'      => $request->publish ?? false,
+            'publish'     => $request->publish ?? false,
         ]);
 
         return redirect()->route('admin.levels.index')->with('success', 'تم إضافة المستوى بنجاح.');
@@ -76,7 +79,7 @@ class LevelController extends Controller
             'price'       => $request->price,
             'slug'        => Str::slug($request->title), // تحديث slug
             'order'       => $request->order ?? $level->order,
-            'publish'      => $request->publish ?? $level->publish,
+            'publish'     => $request->has('publish') ? 1 : $level->publish,
         ]);
 
         return redirect()->route('admin.levels.index')->with('success', 'تم تحديث المستوى بنجاح.');
