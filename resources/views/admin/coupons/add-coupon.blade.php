@@ -17,7 +17,7 @@
                         اختر المستوى <span class="text-red-500">*</span>
                     </label>
                     <select name="level_id" id="level_id" required
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                        class="bg-gray-50 border border-blue-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
                         <option value="">-- اختر مستوى --</option>
                         @foreach ($levels as $level)
                             <option value="{{ $level->id }}" {{ old('level_id') == $level->id ? 'selected' : '' }}>

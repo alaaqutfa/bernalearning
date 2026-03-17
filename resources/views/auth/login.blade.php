@@ -25,11 +25,11 @@
                 <label class="block mb-2 text-sm font-medium text-gray-900">تسجيل الدخول باستخدام</label>
                 <div class="flex gap-4 rtl:space-x-reverse mb-3">
                     <label class="inline-flex items-center cursor-pointer">
-                        <input type="radio" name="login_type" value="phone" checked class="w-4 h-4 text-blue-600 border-gray-300 focus:ring-blue-500">
+                        <input type="radio" name="login_type" value="phone" checked class="w-4 h-4 text-blue-600 border-blue-300 focus:ring-blue-500">
                         <span class="mr-2 text-sm text-gray-900">رقم الهاتف</span>
                     </label>
                     <label class="inline-flex items-center cursor-pointer">
-                        <input type="radio" name="login_type" value="email" class="w-4 h-4 text-blue-600 border-gray-300 focus:ring-blue-500">
+                        <input type="radio" name="login_type" value="email" class="w-4 h-4 text-blue-600 border-blue-300 focus:ring-blue-500">
                         <span class="mr-2 text-sm text-gray-900">البريد الإلكتروني</span>
                     </label>
                 </div>
@@ -45,7 +45,7 @@
             <div class="mb-6">
                 <label for="password" class="block mb-2 text-sm font-medium text-gray-900">كلمة المرور</label>
                 <input type="password" name="password" id="password" required
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                    class="bg-gray-50 border border-blue-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                     placeholder="••••••••">
                 @error('password')
                     <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
@@ -56,7 +56,7 @@
             <div class="flex items-start mb-6">
                 <div class="flex items-center h-5">
                     <input id="remember" name="remember" type="checkbox"
-                        class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300">
+                        class="w-4 h-4 border border-blue-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300">
                 </div>
                 <label for="remember" class="ms-2 text-sm font-medium text-gray-900">تذكرني</label>
             </div>
@@ -125,7 +125,7 @@
                 input.id = 'login';
                 input.value = value;
                 input.required = true;
-                input.className = 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5';
+                input.className = 'bg-gray-50 border border-blue-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5';
                 input.placeholder = 'رقم الهاتف';
                 input.dir = 'ltr';
 
@@ -155,7 +155,7 @@
                 input.id = 'login';
                 input.value = value;
                 input.required = true;
-                input.className = 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5';
+                input.className = 'bg-gray-50 border border-blue-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5';
                 input.placeholder = 'example@domain.com';
                 input.dir = 'auto';
 

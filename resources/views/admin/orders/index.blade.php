@@ -7,7 +7,7 @@
     <h1 class="text-2xl font-bold mb-6">الطلبات</h1>
 
     <form method="GET" class="mb-4">
-        <select name="status" onchange="this.form.submit()" class="border rounded p-2">
+        <select name="status" onchange="this.form.submit()" class="border border-blue-500 rounded p-2">
             <option value="">جميع الحالات</option>
             <option value="pending" {{ request('status') == 'pending' ? 'selected' : '' }}>قيد الانتظار</option>
             <option value="payment_link_added" {{ request('status') == 'payment_link_added' ? 'selected' : '' }}>تم إنشاء رابط الدفع</option>
@@ -18,7 +18,7 @@
     </form>
 
     <div class="bg-white rounded-lg shadow overflow-hidden">
-        <table class="min-w-full divide-y divide-gray-200">
+        <table class="min-w-full divide-y divide-blue-200">
             <thead class="bg-gray-50">
                 <tr>
                     <th class="px-6 py-3 text-right text-xs font-medium text-gray-500">#</th>
@@ -30,11 +30,11 @@
                     <th class="px-6 py-3 text-right text-xs font-medium text-gray-500"></th>
                 </tr>
             </thead>
-            <tbody class="bg-white divide-y divide-gray-200">
+            <tbody class="bg-white divide-y divide-blue-200">
                 @forelse($orders as $order)
                 <tr>
                     <td class="px-6 py-4">{{ $order->id }}</td>
-                    <td class="px-6 py-4">{{ $order->user->email }}<br>{{ $order->user->phone }}</td>
+                    <td class="px-6 py-4">{{ $order->user->phone }}<br>{{ $order->user->email }}</td>
                     <td class="px-6 py-4">{{ $order->level->title }}</td>
                     <td class="px-6 py-4">${{ number_format($order->amount, 2) }}</td>
                     <td class="px-6 py-4">

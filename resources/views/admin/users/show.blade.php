@@ -66,12 +66,12 @@
     </div>
 
     <!-- جدول الكوبونات (الاشتراكات) -->
-    <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
-        <div class="p-6 border-b border-gray-200">
+    <div class="bg-white rounded-lg shadow-sm border border-blue-200 overflow-hidden">
+        <div class="p-6 border-b border-blue-200">
             <h2 class="text-xl font-semibold">الاشتراكات (الكوبونات)</h2>
         </div>
         <div class="overflow-x-auto">
-            <table class="min-w-full divide-y divide-gray-200">
+            <table class="min-w-full divide-y divide-blue-200">
                 <thead class="bg-gray-50">
                     <tr>
                         <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase">الكوبون</th>
@@ -84,7 +84,7 @@
                         <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase">إجراءات</th>
                     </tr>
                 </thead>
-                <tbody class="bg-white divide-y divide-gray-200">
+                <tbody class="bg-white divide-y divide-blue-200">
                     @forelse($user->coupons as $coupon)
                     <tr>
                         <td class="px-6 py-4 whitespace-nowrap text-sm font-mono">{{ $coupon->code }}</td>

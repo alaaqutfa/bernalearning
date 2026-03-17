@@ -124,7 +124,7 @@
                             <div class="flex items-center">
                                 <input type="checkbox" name="level_ids[]" value="{{ $level->id }}"
                                     id="level_{{ $level->id }}"
-                                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500"
+                                    class="w-4 h-4 text-blue-600 bg-gray-100 border-blue-300 rounded focus:ring-blue-500"
                                     {{ in_array($level->id, old('level_ids', [])) ? 'checked' : '' }}>
                                 <label for="level_{{ $level->id }}" class="mr-2 text-sm font-medium text-gray-900">
                                     {{ $level->title }} - <span

@@ -30,18 +30,18 @@
                         <div>
                             <label for="name" class="block text-sm font-medium text-gray-700 mb-1">الاسم</label>
                             <input type="text" name="name" id="name" value="{{ old('name', $user->name) }}" required
-                                class="w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                                class="w-full rounded-lg border-blue-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
                         </div>
                         {{-- <div>
                             <label for="email" class="block text-sm font-medium text-gray-700 mb-1">البريد الإلكتروني</label>
                             <input type="email" name="email" id="email" value="{{ old('email', $user->email) }}"
-                                class="w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                                class="w-full rounded-lg border-blue-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                                 placeholder="example@domain.com">
                         </div>
                         <div>
                             <label for="phone" class="block text-sm font-medium text-gray-700 mb-1">رقم الهاتف</label>
                             <input type="tel" name="phone" id="phone" value="{{ old('phone', $user->phone) }}"
-                                class="w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                                class="w-full rounded-lg border-blue-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                                 placeholder="+961 00 000 000">
                         </div> --}}
                     </div>
@@ -62,17 +62,17 @@
                         <div>
                             <label for="current_password" class="block text-sm font-medium text-gray-700 mb-1">كلمة المرور الحالية</label>
                             <input type="password" name="current_password" id="current_password" required
-                                class="w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                                class="w-full rounded-lg border-blue-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
                         </div>
                         <div>
                             <label for="new_password" class="block text-sm font-medium text-gray-700 mb-1">كلمة المرور الجديدة</label>
                             <input type="password" name="new_password" id="new_password" required
-                                class="w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                                class="w-full rounded-lg border-blue-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
                         </div>
                         <div>
                             <label for="new_password_confirmation" class="block text-sm font-medium text-gray-700 mb-1">تأكيد كلمة المرور الجديدة</label>
                             <input type="password" name="new_password_confirmation" id="new_password_confirmation" required
-                                class="w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                                class="w-full rounded-lg border-blue-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
                         </div>
                     </div>
                     <div class="mt-4">

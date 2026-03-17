@@ -25,7 +25,7 @@
                         المستوى <span class="text-red-500">*</span>
                     </label>
                     <select name="level_id" id="level_id" required
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 @error('level_id') border-red-500 @enderror">
+                        class="bg-gray-50 border border-blue-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 @error('level_id') border-red-500 @enderror">
                         <option value="">اختر المستوى</option>
                         @foreach ($levels as $level)
                             <option value="{{ $level->id }}"
@@ -45,7 +45,7 @@
                         فيديو Bunny <span class="text-red-500">*</span>
                     </label>
                     <select name="bunny_video_id" id="bunny_video_id" required
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 @error('bunny_video_id') border-red-500 @enderror">
+                        class="bg-gray-50 border border-blue-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 @error('bunny_video_id') border-red-500 @enderror">
                         <option value="">اختر فيديو</option>
                         @foreach ($availableVideos as $video)
                             <option value="{{ $video['guid'] }}" data-title="{{ $video['title'] }}"
@@ -66,7 +66,7 @@
                         عنوان الفيديو <span class="text-red-500">*</span>
                     </label>
                     <input type="text" id="title" name="title" value="{{ old('title') }}" required
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 @error('title') border-red-500 @enderror"
+                        class="bg-gray-50 border border-blue-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 @error('title') border-red-500 @enderror"
                         placeholder="أدخل عنوان الفيديو">
                     @error('title')
                         <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
@@ -79,7 +79,7 @@
                         الوصف
                     </label>
                     <textarea id="description" name="description" rows="4"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 @error('description') border-red-500 @enderror"
+                        class="bg-gray-50 border border-blue-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 @error('description') border-red-500 @enderror"
                         placeholder="أدخل وصف الفيديو (اختياري)">{{ old('description') }}</textarea>
                     @error('description')
                         <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
@@ -92,7 +92,7 @@
                         الترتيب
                     </label>
                     <input type="number" id="order" name="order" value="{{ old('order', 0) }}" min="0"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 @error('order') border-red-500 @enderror"
+                        class="bg-gray-50 border border-blue-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 @error('order') border-red-500 @enderror"
                         placeholder="0">
                     @error('order')
                         <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
@@ -101,7 +101,7 @@
                 </div>
 
                 <!-- أزرار الإجراءات -->
-                <div class="flex items-center gap-3 border-t border-gray-200 pt-5">
+                <div class="flex items-center gap-3 border-t border-blue-200 pt-5">
                     <button type="submit"
                         class="inline-flex items-center px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg text-sm transition">
                         <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">

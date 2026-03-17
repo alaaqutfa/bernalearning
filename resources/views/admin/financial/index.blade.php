@@ -9,14 +9,14 @@
             <h1 class="text-2xl font-bold text-gray-800">التقارير المالية</h1>
             <div class="flex justify-center items-center gap-2 flex-col md:flex-row">
                 <form method="GET" class="flex gap-2">
-                    <select name="month" class="w-32 border border-gray-300 rounded-lg px-3 py-2">
+                    <select name="month" class="w-32 border border-blue-300 rounded-lg px-3 py-2">
                         @for ($m = 1; $m <= 12; $m++)
                             <option value="{{ $m }}" {{ $month == $m ? 'selected' : '' }}>
                                 {{ DateTime::createFromFormat('!m', $m)->format('F') }}
                             </option>
                         @endfor
                     </select>
-                    <select name="year" class="w-24 border border-gray-300 rounded-lg px-3 py-2">
+                    <select name="year" class="w-24 border border-blue-300 rounded-lg px-3 py-2">
                         @for ($y = date('Y') - 2; $y <= date('Y'); $y++)
                             <option value="{{ $y }}" {{ $year == $y ? 'selected' : '' }}>{{ $y }}
                             </option>
@@ -139,7 +139,7 @@
             </div>
 
             <div class="overflow-x-auto">
-                <table class="min-w-full divide-y divide-gray-200">
+                <table class="min-w-full divide-y divide-blue-200">
                     <thead class="bg-gray-50">
                         <tr>
                             <th class="px-6 py-3 text-right text-xs font-medium text-gray-500">التاريخ</th>
@@ -149,7 +149,7 @@
                             <th class="px-6 py-3 text-right text-xs font-medium text-gray-500">إجراءات</th>
                         </tr>
                     </thead>
-                    <tbody class="bg-white divide-y divide-gray-200">
+                    <tbody class="bg-white divide-y divide-blue-200">
                         @forelse($expenses as $expense)
                             <tr>
                                 <td class="px-6 py-4">{{ $expense->expense_date->format('Y-m-d') }}</td>
