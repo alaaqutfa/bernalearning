@@ -17,7 +17,7 @@
         </select>
     </form>
 
-    <div class="bg-white rounded-lg shadow overflow-hidden">
+    <div class="bg-white rounded-lg shadow shadow-blue-200 overflow-hidden">
         <table class="min-w-full divide-y divide-blue-200">
             <thead class="bg-gray-50">
                 <tr>
