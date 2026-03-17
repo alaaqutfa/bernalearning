@@ -29,7 +29,7 @@ class VideoController extends Controller
         } else {
             $videos = Video::with('level')->orderBy('level_id')->orderBy('order')->get();
         }
-        $levels = Level::all(); // للفلترة
+        $levels = Level::orderBy('order')->get();
         return view('admin.videos.index', compact('videos', 'levels', 'levelId') + ['bunny' => $this->bunnyService]);
     }
 

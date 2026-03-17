@@ -24,7 +24,7 @@
                     @if ($level->price == 0)
                         <a href="{{ route('level.index') }}"
                             class="flex items-start p-4 my-4 hover:bg-gray-50 transition bg-blue-50 border-4 border-blue-500 text-blue-900">
-                            لمشاهدة المستوى {{ $level->title }} كاملاً يرجي الأشتراك بالضغط هنا
+                            لمشاهدة المستوى كاملاً يرجي الأشتراك بالضغط هنا
                         </a>
                     @endif
 
@@ -109,7 +109,7 @@
                         @if ($level->price == 0)
                             <a href="{{ route('level.index') }}"
                                 class="flex items-start p-4 hover:bg-gray-50 transition bg-blue-50 border-r-4 border-blue-500 text-blue-900">
-                                لمشاهدة المستوى {{ $level->title }} كاملاً يرجي الأشتراك بالضغط هنا
+                                لمشاهدة المستوى كاملاً يرجي الأشتراك بالضغط هنا
                             </a>
                         @endif
                     </div>
